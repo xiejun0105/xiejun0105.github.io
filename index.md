@@ -2,11 +2,26 @@
 layout: default
 title: Home
 ---
+<div style="margin-top: 20px;">
+
+<h1 style="font-size: 30px; margin-bottom: 5px;">Jun Xie</h1>
+
+<p style="margin-top: 0; font-size: 16px; color: #555;">
+Assistant Professor, Kyushu University
+</p>
+
+</div>
+
 <div style="position: sticky; top: 0; background: white; padding: 10px 0; border-bottom: 1px solid #ddd; z-index: 1000;">
   <a href="/" style="margin-right:20px;">Home</a>
   <a href="/publications/" style="margin-right:20px;">Publications</a>
   <a href="/teaching/">Teaching</a>
 </div>
+
+
+<div style="display: flex; align-items: center; gap: 40px;">
+
+<div style="flex: 1;">
 
 ## About Me
 
@@ -17,6 +32,21 @@ My research focuses on corporate sustainability, human capital, and sustainable 
 - [Google Scholar](https://scholar.google.com/citations?user=Xz6_mOAAAAAJ&hl=en)
 - [ORCiD](https://orcid.org/0000-0001-7511-7869)
 - [Research Map](https://researchmap.jp/xiejun)
+
+I examine how ESG and well-being influence firm value, market efficiency, and urban prosperity using global data.
+
+</div>
+
+<div style="flex: 1; text-align: center;">
+
+<img src="/images/wordcloud_paper.png" style="max-width: 100%; height: auto;">
+
+</div>
+
+</div>
+
+## About Me
+
 
 ## Media & News
 
