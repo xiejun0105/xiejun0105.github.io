@@ -8,8 +8,6 @@ title: Home
   <a href="/teaching/">Teaching</a>
 </div>
 
-[Home](/) | [Publications](/publications/) | [Teaching](/teaching/)
-
 Assistant Professor  
 Kyushu University  
 
