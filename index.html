@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Jun Xie</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <style>
+    body {
+      margin: 0;
+      font-family: Georgia, "Times New Roman", serif;
+      color: #222;
+      background: #fff;
+      line-height: 1.6;
+    }
+
+    .container {
+      max-width: 1050px;
+      margin: 0 auto;
+      padding: 40px 32px;
+    }
+
+    header {
+      border-bottom: 1px solid #ddd;
+      margin-bottom: 32px;
+      padding-bottom: 16px;
+    }
+
+    .site-name {
+      font-family: "Helvetica Neue", Arial, sans-serif;
+      font-size: 28px;
+      font-weight: 600;
+      margin: 0 0 18px 0;
+    }
+
+    nav a {
+      font-family: "Helvetica Neue", Arial, sans-serif;
+      font-size: 16px;
+      margin-right: 28px;
+      text-decoration: none;
+      color: #0057b8;
+    }
+
+    nav a:hover {
+      text-decoration: underline;
+    }
+
+    .hero {
+      display: flex;
+      gap: 48px;
+      align-items: center;
+      margin-top: 40px;
+    }
+
+    .hero-text {
+      flex: 1;
+      min-width: 300px;
+    }
+
+    .hero-image {
+      flex: 1;
+      text-align: center;
+      min-width: 300px;
+    }
+
+    .hero-image img {
+      max-width: 100%;
+      height: auto;
+    }
+
+    h1 {
+      font-family: "Helvetica Neue", Arial, sans-serif;
+      font-size: 34px;
+      margin: 0 0 8px 0;
+    }
+
+    h2 {
+      font-family: "Helvetica Neue", Arial, sans-serif;
+      font-size: 24px;
+      margin-top: 48px;
+      border-bottom: 1px solid #ddd;
+      padding-bottom: 8px;
+    }
+
+    .position {
+      font-family: "Helvetica Neue", Arial, sans-serif;
+      font-size: 17px;
+      color: #555;
+      margin-bottom: 28px;
+    }
+
+    .links a {
+      margin-right: 14px;
+      color: #0057b8;
+      text-decoration: none;
+      font-family: "Helvetica Neue", Arial, sans-serif;
+    }
+
+    .links a:hover {
+      text-decoration: underline;
+    }
+
+    .news-item {
+      margin-bottom: 18px;
+    }
+
+    .news-date {
+      font-weight: bold;
+      font-family: "Helvetica Neue", Arial, sans-serif;
+    }
+
+    .news-item a {
+      color: #0057b8;
+      text-decoration: none;
+    }
+
+    .news-item a:hover {
+      text-decoration: underline;
+    }
+
+    @media (max-width: 800px) {
+      .hero {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .hero-image {
+        text-align: left;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+
+    <header>
+      <div class="site-name">Jun Xie</div>
+      <nav>
+        <a href="/">Home</a>
+        <a href="/publications/">Publications</a>
+        <a href="/teaching/">Teaching</a>
+      </nav>
+    </header>
+
+    <section class="hero">
+      <div class="hero-text">
+        <h1>Jun Xie</h1>
+        <div class="position">Assistant Professor, Kyushu University</div>
+
+        <p>
+          I am an Assistant Professor at Kyushu University.
+          My research focuses on corporate sustainability, human capital,
+          and sustainable finance.
+        </p>
+
+        <p>
+          I examine how ESG and well-being influence firm value,
+          market efficiency, and urban prosperity using global data.
+        </p>
+
+        <div class="links">
+          <a href="mailto:xiejun0105@gmail.com">Contact</a>
+          <a href="https://scholar.google.com/citations?user=Xz6_mOAAAAAJ&hl=en">Google Scholar</a>
+          <a href="https://orcid.org/0000-0001-7511-7869">ORCID</a>
+          <a href="https://researchmap.jp/xiejun">Research Map</a>
+        </div>
+      </div>
+
+      <div class="hero-image">
+        <img src="/images/wordcloud_paper.png" alt="Research word cloud">
+      </div>
+    </section>
+
+    <section>
+      <h2>Media & News</h2>
+
+      <div class="news-item">
+        <div class="news-date">8 Jan 2026</div>
+        <em>Doing good pays off: Environmentally and socially responsible companies drive value and market efficiency</em><br>
+        <a href="https://www.eurekalert.org/news-releases/1111140">Read more</a>
+      </div>
+
+      <div class="news-item">
+        <div class="news-date">10 Dec 2024</div>
+        <em>Better environmental performance boosts profits and cuts costs</em><br>
+        <a href="https://www.eurekalert.org/news-releases/1067513">Read more</a>
+      </div>
+
+      <div class="news-item">
+        <div class="news-date">31 Oct 2024</div>
+        <em>Press release of cooperating research (Japanese)</em><br>
+        <a href="https://www.peacemind.co.jp/newsrelease/archives/category/paper">Read more</a>
+      </div>
+
+      <div class="news-item">
+        <div class="news-date">8 Jul 2024</div>
+        <em>Companies that mitigate climate change reduce their cost of capital</em><br>
+        <a href="https://phys.org/news/2024-07-companies-mitigate-climate-capital.html">Read more</a>
+      </div>
+
+      <div class="news-item">
+        <div class="news-date">7 Jul 2023</div>
+        <em>Do investors incorporate financial materiality of environmental information in risk evaluation?</em><br>
+        <a href="https://www.eurekalert.org/news-releases/994838">Read more</a>
+      </div>
+    </section>
+
+  </div>
+</body>
+</html>
