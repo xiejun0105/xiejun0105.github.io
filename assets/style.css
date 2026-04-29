@@ -1,31 +1,47 @@
 
 :root {
-  --bg: #ffffff;
-  --text: #1f2933;
+  --bg: #fbf8f1;
+  --paper: rgba(255, 255, 255, 0.72);
+  --paper-solid: #ffffff;
+  --text: #20242a;
   --muted: #65717f;
-  --line: #e6e8eb;
-  --accent: #225ea8;
-  --accent-soft: #f2f6fb;
-  --card: #ffffff;
+  --line: rgba(32, 36, 42, 0.12);
+  --accent: #2b5f94;
+  --accent-soft: rgba(43, 95, 148, 0.10);
+  --shadow: 0 18px 48px rgba(24, 39, 75, 0.08);
   --max: 1120px;
+  --serif: Georgia, "Times New Roman", "Noto Serif CJK SC", "Noto Serif CJK JP", "Songti SC", "SimSun", "Yu Mincho", "Hiragino Mincho ProN", serif;
+  --sans: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", "Helvetica Neue", Arial, "Noto Sans CJK SC", "Noto Sans CJK JP", "Microsoft YaHei", "PingFang SC", "Hiragino Sans", sans-serif;
 }
 
-* {
-  box-sizing: border-box;
+:root[data-theme="dark"] {
+  --bg: #141619;
+  --paper: rgba(27, 30, 35, 0.74);
+  --paper-solid: #1b1e23;
+  --text: #eef1f4;
+  --muted: #a5adb8;
+  --line: rgba(238, 241, 244, 0.14);
+  --accent: #8eb8ea;
+  --accent-soft: rgba(142, 184, 234, 0.13);
+  --shadow: 0 20px 55px rgba(0, 0, 0, 0.28);
 }
 
-html {
-  scroll-behavior: smooth;
-}
+* { box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
 
 body {
   margin: 0;
-  background: var(--bg);
+  background:
+    radial-gradient(circle at top left, rgba(43, 95, 148, 0.09), transparent 32rem),
+    var(--bg);
   color: var(--text);
-  font-family: Georgia, "Times New Roman", "Hiragino Mincho ProN", "Yu Mincho", "Noto Serif CJK JP", serif;
+  font-family: var(--serif);
   font-size: 17px;
-  line-height: 1.68;
+  line-height: 1.7;
   -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  transition: background 0.25s ease, color 0.25s ease;
 }
 
 a {
@@ -33,127 +49,149 @@ a {
   text-decoration: none;
 }
 
-a:hover {
-  text-decoration: underline;
-}
+a:hover { text-decoration: underline; }
 
 .container {
   max-width: var(--max);
   margin: 0 auto;
-  padding: 42px 34px 70px;
+  padding: 34px 34px 72px;
 }
 
 .site-header {
+  margin-bottom: 50px;
+}
+
+.motto-row {
   display: flex;
-  align-items: flex-end;
-  justify-content: space-between;
-  gap: 24px;
-  border-bottom: 1px solid var(--line);
-  padding-bottom: 18px;
-  margin-bottom: 42px;
+  justify-content: center;
+  align-items: center;
+  padding: 8px 0 22px;
 }
 
 .brand {
-  font-family: "Helvetica Neue", Arial, "Hiragino Sans", "Noto Sans CJK JP", sans-serif;
-  font-size: 19px;
-  font-weight: 600;
-  letter-spacing: 0.01em;
+  font-family: var(--sans);
+  font-size: clamp(24px, 3vw, 34px);
+  font-weight: 520;
+  letter-spacing: 0.015em;
   color: var(--text);
-  white-space: nowrap;
+  text-align: center;
+  line-height: 1.25;
 }
 
 .brand:hover {
+  color: var(--accent);
   text-decoration: none;
-  color: var(--accent);
 }
 
-.nav-area {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-end;
-  gap: 12px;
+.control-row {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+  gap: 20px;
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+  padding: 13px 0;
 }
 
-.main-nav,
-.lang-nav {
+.left-controls {
+  grid-column: 1;
+  justify-self: start;
   display: flex;
-  gap: 22px;
+  align-items: center;
+  gap: 9px;
   flex-wrap: wrap;
-  justify-content: flex-end;
-  font-family: "Helvetica Neue", Arial, "Hiragino Sans", "Noto Sans CJK JP", sans-serif;
 }
 
-.main-nav a {
-  font-size: 15px;
-  color: var(--text);
+.main-nav {
+  grid-column: 3;
+  justify-self: end;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
 }
 
-.main-nav a.active {
-  color: var(--accent);
-  font-weight: 600;
-}
-
-.lang-nav {
-  gap: 8px;
-}
-
-.lang-nav a {
-  font-size: 12px;
-  line-height: 1;
-  color: var(--muted);
+.pill {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 32px;
+  padding: 0 13px;
   border: 1px solid var(--line);
   border-radius: 999px;
-  padding: 6px 10px;
+  background: var(--paper);
+  color: var(--muted);
+  font-family: var(--sans);
+  font-size: 13px;
+  letter-spacing: 0.01em;
+  backdrop-filter: blur(10px);
 }
 
-.lang-nav a.active {
+.pill:hover {
   color: var(--accent);
-  border-color: #b8cce6;
+  border-color: rgba(43, 95, 148, 0.35);
   background: var(--accent-soft);
+  text-decoration: none;
+}
+
+.pill.active {
+  color: var(--accent);
+  border-color: rgba(43, 95, 148, 0.36);
+  background: var(--accent-soft);
+  font-weight: 560;
+}
+
+.theme-toggle {
+  cursor: pointer;
+  gap: 7px;
+  color: var(--muted);
+}
+
+.theme-toggle .icon {
+  font-size: 14px;
+  line-height: 1;
 }
 
 .hero {
   display: grid;
-  grid-template-columns: minmax(0, 1.05fr) minmax(300px, 0.95fr);
-  gap: 56px;
+  grid-template-columns: minmax(0, 1.02fr) minmax(300px, 0.98fr);
+  gap: 58px;
   align-items: center;
-  margin: 46px 0 52px;
+  margin: 48px 0 56px;
 }
 
 .kicker {
-  font-family: "Helvetica Neue", Arial, "Hiragino Sans", "Noto Sans CJK JP", sans-serif;
+  font-family: var(--sans);
   color: var(--muted);
-  font-size: 14px;
-  letter-spacing: 0.04em;
+  font-size: 13px;
+  letter-spacing: 0.08em;
   text-transform: uppercase;
-  margin-bottom: 10px;
+  margin-bottom: 12px;
 }
 
-h1,
-h2,
-h3 {
-  font-family: "Helvetica Neue", Arial, "Hiragino Sans", "Noto Sans CJK JP", sans-serif;
+h1, h2, h3 {
+  font-family: var(--sans);
   line-height: 1.25;
   color: var(--text);
 }
 
 h1 {
-  font-size: 42px;
-  font-weight: 650;
-  margin: 0 0 8px;
-  letter-spacing: -0.02em;
+  font-size: clamp(36px, 4.3vw, 54px);
+  font-weight: 640;
+  margin: 0 0 10px;
+  letter-spacing: -0.035em;
 }
 
 .subtitle {
-  font-family: "Helvetica Neue", Arial, "Hiragino Sans", "Noto Sans CJK JP", sans-serif;
+  font-family: var(--sans);
   color: var(--muted);
   font-size: 17px;
-  margin-bottom: 28px;
+  margin-bottom: 30px;
 }
 
 .lead {
   font-size: 18px;
-  color: #2d3742;
+  color: var(--text);
   margin: 0 0 17px;
 }
 
@@ -161,17 +199,17 @@ h1 {
   display: flex;
   flex-wrap: wrap;
   gap: 10px;
-  margin-top: 24px;
-  font-family: "Helvetica Neue", Arial, "Hiragino Sans", "Noto Sans CJK JP", sans-serif;
+  margin-top: 26px;
+  font-family: var(--sans);
 }
 
 .profile-links a {
   border: 1px solid var(--line);
   border-radius: 999px;
-  padding: 7px 12px;
+  padding: 7px 13px;
   font-size: 14px;
   color: var(--accent);
-  background: #fff;
+  background: var(--paper);
 }
 
 .profile-links a:hover {
@@ -179,59 +217,65 @@ h1 {
   text-decoration: none;
 }
 
+.hero-image {
+  display: flex;
+  justify-content: center;
+}
+
 .hero-image img {
-  width: 100%;
-  max-width: 520px;
+  width: min(100%, 540px);
   display: block;
-  margin: 0 auto;
+  filter: saturate(0.95);
 }
 
 .section {
-  margin-top: 58px;
+  margin-top: 64px;
 }
 
 .section-title {
   font-size: 24px;
-  font-weight: 650;
+  font-weight: 620;
   border-bottom: 1px solid var(--line);
-  padding-bottom: 10px;
-  margin: 0 0 24px;
+  padding-bottom: 12px;
+  margin: 0 0 25px;
+  letter-spacing: -0.01em;
 }
 
 .section-intro {
   color: var(--muted);
-  margin-top: -10px;
-  margin-bottom: 22px;
+  margin-top: -8px;
+  margin-bottom: 24px;
 }
 
 .reports-grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 22px;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 18px;
   align-items: stretch;
 }
 
 .report-card {
   border: 1px solid var(--line);
-  border-radius: 14px;
-  background: var(--card);
+  border-radius: 18px;
+  background: var(--paper);
   overflow: hidden;
   display: flex;
   flex-direction: column;
   min-height: 100%;
-  transition: transform 0.18s ease, box-shadow 0.18s ease;
+  box-shadow: var(--shadow);
+  transition: transform 0.18s ease, border-color 0.18s ease, background 0.18s ease;
 }
 
 .report-card:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 10px 26px rgba(24, 39, 75, 0.08);
+  transform: translateY(-3px);
+  border-color: rgba(43, 95, 148, 0.34);
   text-decoration: none;
 }
 
 .report-image-wrap {
-  height: 260px;
+  height: 268px;
   padding: 18px;
-  background: #f7f8fa;
+  background: color-mix(in srgb, var(--paper-solid) 78%, var(--accent-soft));
   display: flex;
   align-items: center;
   justify-content: center;
@@ -250,17 +294,17 @@ h1 {
 
 .report-title {
   display: block;
-  font-family: "Helvetica Neue", Arial, "Hiragino Sans", "Noto Sans CJK JP", sans-serif;
-  font-size: 14px;
-  font-weight: 600;
+  font-family: var(--sans);
+  font-size: 13.5px;
+  font-weight: 610;
   color: var(--text);
-  line-height: 1.35;
-  margin-bottom: 6px;
+  line-height: 1.4;
+  margin-bottom: 5px;
 }
 
 .report-link {
-  font-family: "Helvetica Neue", Arial, "Hiragino Sans", "Noto Sans CJK JP", sans-serif;
-  font-size: 12px;
+  font-family: var(--sans);
+  font-size: 11.5px;
   color: var(--muted);
 }
 
@@ -275,24 +319,22 @@ h1 {
 }
 
 .news-date {
-  font-family: "Helvetica Neue", Arial, "Hiragino Sans", "Noto Sans CJK JP", sans-serif;
+  font-family: var(--sans);
   font-size: 13px;
   color: var(--muted);
   margin-bottom: 2px;
 }
 
-.news-title {
-  font-style: italic;
-}
+.news-title { font-style: italic; }
 
 .news-item a {
-  font-family: "Helvetica Neue", Arial, "Hiragino Sans", "Noto Sans CJK JP", sans-serif;
+  font-family: var(--sans);
   font-size: 13px;
 }
 
 .page-title {
-  margin-top: 6px;
-  margin-bottom: 8px;
+  margin-top: 8px;
+  margin-bottom: 10px;
 }
 
 .page-description {
@@ -301,9 +343,7 @@ h1 {
   max-width: 760px;
 }
 
-.year-block {
-  margin-top: 36px;
-}
+.year-block { margin-top: 36px; }
 
 .year-heading {
   font-size: 22px;
@@ -320,94 +360,75 @@ h1 {
 }
 
 .pub-item {
-  padding: 0 0 18px 0;
+  padding: 0 0 18px;
   margin-bottom: 18px;
-  border-bottom: 1px solid #f0f1f2;
+  border-bottom: 1px solid var(--line);
 }
 
-.pub-title {
-  font-weight: 600;
-}
+.pub-title { font-weight: 610; }
 
-.pub-meta {
-  color: var(--muted);
-}
+.pub-meta { color: var(--muted); }
 
 .pub-doi {
-  font-family: "Helvetica Neue", Arial, "Hiragino Sans", "Noto Sans CJK JP", sans-serif;
+  font-family: var(--sans);
   font-size: 13px;
   margin-top: 4px;
 }
 
 .category-heading {
   font-size: 24px;
-  margin-top: 46px;
+  margin-top: 48px;
   border-bottom: 1px solid var(--line);
   padding-bottom: 8px;
 }
 
 .course-card {
   border: 1px solid var(--line);
-  border-radius: 14px;
+  border-radius: 16px;
   padding: 20px;
-  background: #fff;
+  background: var(--paper);
+  box-shadow: var(--shadow);
   margin-bottom: 34px;
 }
 
 .course-title {
-  font-family: "Helvetica Neue", Arial, "Hiragino Sans", "Noto Sans CJK JP", sans-serif;
+  font-family: var(--sans);
   font-size: 18px;
-  font-weight: 600;
+  font-weight: 610;
 }
 
-.course-meta {
-  color: var(--muted);
-}
+.course-meta { color: var(--muted); }
 
 .supervision-list li {
   padding: 10px 0;
-  border-bottom: 1px solid #f0f1f2;
-}
-
-.thesis-year {
-  font-family: "Helvetica Neue", Arial, "Hiragino Sans", "Noto Sans CJK JP", sans-serif;
-  color: var(--muted);
-  font-size: 13px;
-  margin-left: 8px;
-  white-space: nowrap;
+  border-bottom: 1px solid var(--line);
 }
 
 .footer {
   border-top: 1px solid var(--line);
-  margin-top: 72px;
+  margin-top: 76px;
   padding-top: 18px;
   color: var(--muted);
-  font-family: "Helvetica Neue", Arial, "Hiragino Sans", "Noto Sans CJK JP", sans-serif;
+  font-family: var(--sans);
   font-size: 13px;
 }
 
-@media (max-width: 880px) {
-  .site-header {
-    align-items: flex-start;
-    flex-direction: column;
+@media (max-width: 900px) {
+  .control-row {
+    grid-template-columns: 1fr;
+    gap: 12px;
   }
 
-  .nav-area {
-    align-items: flex-start;
-  }
-
-  .main-nav,
-  .lang-nav {
-    justify-content: flex-start;
+  .left-controls,
+  .main-nav {
+    grid-column: auto;
+    justify-self: center;
+    justify-content: center;
   }
 
   .hero {
     grid-template-columns: 1fr;
-    gap: 32px;
-  }
-
-  h1 {
-    font-size: 34px;
+    gap: 36px;
   }
 
   .reports-grid {
@@ -415,20 +436,25 @@ h1 {
   }
 
   .report-image-wrap {
-    height: 230px;
+    height: 240px;
   }
 }
 
 @media (max-width: 560px) {
   .container {
-    padding: 28px 20px 54px;
+    padding: 26px 20px 54px;
   }
 
-  .main-nav {
-    gap: 16px;
+  .brand {
+    font-size: 23px;
   }
 
   body {
     font-size: 16px;
+  }
+
+  .pill {
+    height: 31px;
+    padding: 0 11px;
   }
 }
