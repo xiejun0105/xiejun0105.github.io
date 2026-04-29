@@ -8,9 +8,6 @@ title: Home
   <a href="/teaching/">Teaching</a>
 </div>
 
-Assistant Professor  
-Kyushu University  
-
 ## About Me
 
 I am an Assistant Professor at Kyushu University.  
