@@ -2,8 +2,7 @@
 layout: default
 title: Home
 ---
-
-# Jun Xie
+[Home](/) | [Publications](/publications/) | [Teaching](/teaching/)
 
 Assistant Professor  
 Kyushu University  
@@ -11,11 +10,6 @@ Kyushu University
 ## About Me
 
 I am an Assistant Professor at Kyushu University.  
-My research focuses on corporate sustainability, well being, and sustainable finance.
+My research focuses on corporate sustainability, human capital, and sustainable finance.
 
-## Navigation
-
-- [Research](/research/)
-- [Teaching](/teaching/)
-- [CV](/cv/)
 - [Contact](mailto:xiejun0105@gmail.com)
