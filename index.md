@@ -8,11 +8,14 @@ title: Home
 Assistant Professor  
 Kyushu University  
 
-Welcome to my academic homepage.
+## About Me
+
+I am an Assistant Professor at Kyushu University.  
+My research focuses on corporate sustainability, well being, and sustainable finance.
 
 ## Navigation
 
-- [Academic Profile](/academic/)
 - [Research](/research/)
 - [Teaching](/teaching/)
-- [Contact](/contact/)
+- [CV](/cv/)
+- [Contact](mailto:xiejun0105@gmail.com)
