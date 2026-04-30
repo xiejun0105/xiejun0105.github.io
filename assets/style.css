@@ -244,7 +244,7 @@ main { max-width: 980px; }
   background:
     linear-gradient(to right, var(--bg) 0%, color-mix(in srgb, var(--bg) 78%, transparent) 26%, transparent 70%),
     url("/images/wordcloud_paper.png") no-repeat center right;
-  background-size: contain;
+  background-size: 120%;
   opacity: .28;
   pointer-events: none;
 }
@@ -384,7 +384,19 @@ html[data-theme="dark"] .hero::before { opacity: .24; filter: saturate(.85) brig
   .site-header { position: static; }
   .nav-row { grid-template-columns: 1fr; }
   .main-nav,.utility-nav { grid-column: auto; justify-self: start; }
-  .dropdown { position: static; box-shadow: none; margin-top: 8px; }
+  .dropdown {
+  display: none !important;
+  position: static;
+  box-shadow: none;
+  margin-top: 8px;
+  }
+  .nav-item:hover .dropdown {
+    display: none !important;
+  }
+
+  .nav-trigger {
+    cursor: pointer;
+  }
   .hero { min-height: auto; padding: 18px 0 28px; margin-top: 20px; }
   .hero::before { right: -18%; width: 90%; height: 62%; top: 52%; opacity: .12; }
   .highlight-grid,.reports-grid { grid-template-columns: 1fr; }

@@ -38,5 +38,41 @@
       }, { rootMargin: "-20% 0px -65% 0px", threshold: 0.01 });
       sections.forEach(section => observer.observe(section));
     }
+    // Mobile: make Publications / Teaching go directly to default pages
+    document.querySelectorAll(".nav-item .nav-trigger").forEach((trigger) => {
+      trigger.addEventListener("click", (event) => {
+        if (window.innerWidth > 900) return;
+
+        const item = trigger.closest(".nav-item");
+        if (!item || !item.querySelector(".dropdown")) return;
+
+        const text = trigger.textContent.trim();
+
+        event.preventDefault();
+        event.stopPropagation();
+
+        const path = window.location.pathname;
+        const prefix =
+          path.startsWith("/ja/") ? "/ja" :
+          path.startsWith("/zh/") ? "/zh" :
+          "";
+
+        if (
+          text === "Publications" ||
+          text === "業績" ||
+          text === "发表成果"
+        ) {
+          window.location.href = `${prefix}/publications/journal/`;
+        }
+
+        if (
+          text === "Teaching" ||
+          text === "教育・研究指導" ||
+          text === "教学与指导"
+        ) {
+          window.location.href = `${prefix}/teaching/supervision/`;
+        }
+      });
+    });
   });
 })();
