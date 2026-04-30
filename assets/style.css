@@ -101,7 +101,7 @@ a:hover { color: var(--accent-strong); }
 .brand-sub {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  width: 74%;
+  width: 45%;
   margin: 5px auto 0;
   color: var(--muted);
   font-size: 16px;
@@ -394,3 +394,4 @@ html[data-theme="dark"] .hero::before { opacity: .24; filter: saturate(.85) brig
   .hero::before { display: none; }
   body { font-size: 15.5px; }
 }
+
