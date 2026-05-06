@@ -35,7 +35,9 @@
     }
 
     document.querySelectorAll("[data-featured-blog-carousel]").forEach((carousel) => {
-      if (!posts.length) return;
+      const featuredPosts = posts.filter((post) => post.featured).slice(0, 5);
+      const carouselPosts = featuredPosts.length ? featuredPosts : posts.slice(0, 5);
+      if (!carouselPosts.length) return;
 
       const wrap = carousel.closest(".featured-blog");
       const prev = wrap ? wrap.querySelector("[data-featured-blog-prev]") : null;
@@ -44,12 +46,12 @@
       let current = 0;
       let timer = null;
 
-      carousel.innerHTML = posts.map((post) => `
+      carousel.innerHTML = carouselPosts.map((post) => `
         <a class="featured-blog-slide" href="${escapeHtml(post.href)}">
           <div class="featured-blog-image"><img src="${escapeHtml(post.image)}" alt=""></div>
           <div class="featured-blog-content">
             <div class="blog-card-meta">${escapeHtml(post.tag)}</div>
-            <h2>${escapeHtml(post.title)}</h2>
+            <h2>${escapeHtml(post.featuredTitle || post.title)}</h2>
             <p>${escapeHtml(post.excerpt)}</p>
             <span class="blog-card-status">${escapeHtml(post.status)}</span>
           </div>
@@ -57,7 +59,7 @@
       `).join("");
 
       if (dotsWrap) {
-        dotsWrap.innerHTML = posts.map((post, index) => (
+        dotsWrap.innerHTML = carouselPosts.map((post) => (
           `<button type="button" data-featured-blog-dot aria-label="Show ${escapeHtml(post.title)}"></button>`
         )).join("");
       }

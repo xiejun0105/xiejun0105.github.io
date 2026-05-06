@@ -730,6 +730,22 @@ main { max-width: 980px; }
 .blog-post-body h2 {
   margin-top: 34px;
 }
+.blog-figure {
+  margin: 30px 0;
+}
+.blog-figure img {
+  width: 100%;
+  display: block;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: #fff;
+}
+.blog-figure figcaption {
+  color: var(--muted);
+  font-size: 13px;
+  line-height: 1.55;
+  margin-top: 9px;
+}
 .blog-post-note {
   border-left: 3px solid var(--accent);
   padding-left: 16px;
