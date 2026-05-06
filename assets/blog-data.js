@@ -5,7 +5,7 @@
       tag: "Research Overview",
       tags: ["Summary", "ESG", "Human Capital", "Climate"],
       featured: true,
-      status: "Read",
+      status: "Essay",
       href: "/blog/about-me/",
       image: "/images/wordcloud_paper.png",
       excerpt: "Why doing good is also good business and good for people: a short overview of the questions that guide my research."
