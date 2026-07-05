@@ -4,136 +4,53 @@
   <meta charset="UTF-8">
   <title>Jun Xie</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="assets/style.css">
-  <script src="/assets/blog-data.js"></script>
-  <script src="assets/site.js"></script>
+  <link rel="stylesheet" href="/assets/style.css">
+  <script src="/assets/site.js"></script>
 </head>
-<body>
-  <div class="container">
-    
-<header class="site-header">
-  <div class="motto-row">
-    <div class="brand-wrap">
-      <a class="brand" href="/">Do well by doing good</a>
-       <div class="brand-sub">
-         <span class="zh">义利并举</span>
-         <span class="ja">三方よし</span>
-       </div>
-    </div>
-  </div>
-  <div class="nav-row">
-    <nav class="main-nav" aria-label="Main navigation">
-      <a class="active" href="/">Home</a>
-      <div class="nav-item">
-        <span class="nav-trigger ">Publications</span>
-        <div class="dropdown">
-          <a href="/publications/journal/">Journal</a>
-          <a href="/publications/misc/">MISC</a>
+<body class="landing-page">
+  <div class="landing-shell">
+    <main class="landing-main">
+      <div class="landing-card-wrap">
+        <section class="identity-card" aria-label="Profile card">
+          <img class="identity-photo" src="/images/profile_small.jpeg" alt="Jun Xie">
+          <div class="identity-body">
+            <div class="identity-motto">Do well by doing good</div>
+            <h1>Jun Xie <span class="degree">Ph.D.</span></h1>
+            <div class="profile-affiliation">Assistant Professor<br>Urban Institute, School of Engineering, Kyushu University</div>
+
+            <div class="profile-links profile-icon-links identity-links" aria-label="Profile links">
+              <a href="mailto:xiejun0105@gmail.com" aria-label="Contact" title="Contact"><svg class="icon-envelope" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 6h16v12H4z"></path><path d="m4 7 8 6 8-6"></path></svg></a>
+              <a href="https://scholar.google.com/citations?user=Xz6_mOAAAAAJ&amp;hl=en" aria-label="Google Scholar" title="Google Scholar"><svg class="icon-solid" viewBox="0 0 24 24" aria-hidden="true"><path d="M5.242 13.769L0 9.5 12 0l12 9.5-5.242 4.269C17.548 11.249 14.978 9.5 12 9.5c-2.977 0-5.548 1.748-6.758 4.269zM12 10a7 7 0 1 0 0 14 7 7 0 0 0 0-14z"></path></svg></a>
+              <a href="https://orcid.org/0000-0001-7511-7869" aria-label="ORCID" title="ORCID"><svg class="icon-solid" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 0C5.372 0 0 5.372 0 12s5.372 12 12 12 12-5.372 12-12S18.628 0 12 0zM7.369 4.378c.525 0 .947.431.947.947s-.422.947-.947.947a.95.95 0 0 1-.947-.947c0-.525.422-.947.947-.947zm-.722 3.038h1.444v10.041H6.647V7.416zm3.562 0h3.9c3.712 0 5.344 2.653 5.344 5.025 0 2.578-2.016 5.025-5.325 5.025h-3.919V7.416zm1.444 1.303v7.444h2.297c3.272 0 4.022-2.484 4.022-3.722 0-2.016-1.284-3.722-4.097-3.722h-2.222z"></path></svg></a>
+              <a href="https://researchmap.jp/xiejun" aria-label="Research Map" title="Research Map"><span aria-hidden="true">R</span></a>
+            </div>
+          </div>
+
+          <p class="identity-summary">I study sustainability as a multi-level challenge&mdash;examining how firms, people, and cities can align their practices and policies to create lasting economic, environmental, and social value.</p>
+
+          <nav class="landing-page-nav" aria-label="Main sections">
+            <a href="/home/">Home</a>
+            <a href="/publications/journal/">Publications</a>
+            <a href="/teaching/supervision/">Teaching</a>
+            <a href="/conference/">Conference</a>
+            <a href="/blog/">Blog</a>
+          </nav>
+        </section>
+
+        <div class="landing-card-controls">
+          <div class="landing-corner-controls" aria-label="Site controls">
+            <nav class="lang-nav landing-lang" aria-label="Language switcher">
+              <a class="active" href="/">EN</a>
+              <a class="" href="/ja/">日本語</a>
+              <a class="" href="/zh/">中文</a>
+            </nav>
+            <button class="theme-toggle" type="button" data-theme-toggle><span class="moon">☾</span><span class="sun">☼</span></button>
+          </div>
         </div>
       </div>
-      <div class="nav-item">
-        <span class="nav-trigger ">Teaching</span>
-        <div class="dropdown">
-          <a href="/teaching/supervision/">Supervision</a>
-          <a href="/teaching/course/">Course</a>
-        </div>
-      </div>
-      <a class="" href="/conference/">Conference</a>
-      <a class="" href="/blog/">Blog</a>
-    </nav>
-    <div></div>
-    <div class="utility-nav">
-      <nav class="lang-nav" aria-label="Language switcher">
-        <a class="active" href="/">EN</a>
-        <a class="" href="/ja/">日本語</a>
-        <a class="" href="/zh/">中文</a>
-      </nav>
-      <button class="theme-toggle" type="button" data-theme-toggle><span class="moon">☾</span><span class="sun">☼</span></button>
-    </div>
-  </div>
-</header>
+    </main>
 
-    
-<section class="hero hero-profile-blog">
-  <div class="featured-blog">
-    <div class="featured-blog-header">
-      <div>
-        <div class="kicker">Featured Research</div>
-      </div>
-      <div class="blog-carousel-controls">
-        <button class="carousel-btn" type="button" data-featured-blog-prev aria-label="Previous featured blog">&larr;</button>
-        <button class="carousel-btn" type="button" data-featured-blog-next aria-label="Next featured blog">&rarr;</button>
-      </div>
-    </div>
-    <div class="featured-blog-carousel" data-featured-blog-carousel aria-live="polite"></div>
-    <div class="carousel-dots" data-featured-blog-dots aria-label="Featured blog pagination"></div>
-  </div>
-
-  <aside class="profile-panel" aria-label="Profile">
-    <img class="profile-photo" src="/images/profile_small.jpeg" alt="Jun Xie">
-    <h1>Jun Xie <span class="degree">Ph.D.</span></h1>
-    <div class="profile-affiliation">Assistant Professor<br>Urban Institute<br>School of Engineering<br>Kyushu University</div>
-    <div class="profile-links profile-icon-links" aria-label="Profile links">
-      <a href="mailto:xiejun0105@gmail.com" aria-label="Contact" title="Contact"><svg class="icon-envelope" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 6h16v12H4z"></path><path d="m4 7 8 6 8-6"></path></svg></a>
-      <a href="https://scholar.google.com/citations?user=Xz6_mOAAAAAJ&amp;hl=en" aria-label="Google Scholar" title="Google Scholar"><img src="https://www.google.com/s2/favicons?domain=scholar.google.com&amp;sz=64" alt=""></a>
-      <a href="https://orcid.org/0000-0001-7511-7869" aria-label="ORCID" title="ORCID"><img src="https://www.google.com/s2/favicons?domain=orcid.org&amp;sz=64" alt=""></a>
-      <a href="https://researchmap.jp/xiejun" aria-label="Research Map" title="Research Map"><span aria-hidden="true">R</span></a>
-    </div>
-    <div class="profile-field-label">Research Areas</div>
-    <ul class="research-list">
-      <li>Corporate sustainability</li>
-      <li>Human capital &amp; well-being</li>
-      <li>Climate change &amp; sustainable cities</li>
-    </ul>
-  </aside>
-</section>
-
-<section class="section">
-  <h2 class="section-title">Policy & International Reports</h2>
-  <p class="section-intro">Selected policy-oriented and international report outputs related to inclusive wealth, education, ESG, and financial impacts.</p>
-  <div class="reports-grid">
-    <a class="report-card" href="https://doi.org/10.56383/QYTB2222">
-      <div class="report-image-wrap"><img src="/images/iw_report_2024.png" alt="Inclusive Wealth Report 2024"></div>
-      <div class="report-body"><span class="report-title">Inclusive Wealth Report 2024</span><span class="report-link">UNESCO MGIEP</span></div>
-    </a>
-    <a class="report-card" href="https://doi.org/10.56383/QKNP4119">
-      <div class="report-image-wrap"><img src="/images/education_UNESCO.png" alt="Reimagining Education"></div>
-      <div class="report-body"><span class="report-title">Reimagining Education</span><span class="report-link">UNESCO MGIEP</span></div>
-    </a>
-    <a class="report-card" href="https://doi.org/10.22617/WPS240415-2">
-      <div class="report-image-wrap"><img src="/images/ADB_wp_2024.png" alt="ADB Working Paper"></div>
-      <div class="report-body"><span class="report-title">ESG Performance and Financial Impacts</span><span class="report-link">ADB Working Paper</span></div>
-    </a>
-  </div>
-</section>
-
-<section class="section">
-  <h2 class="section-title">Funding & Awards</h2>
-  <p class="section-intro">Selected research grants and awards supporting work on ESG, sustainability, and socio-economic systems.</p>
-  <div class="highlight-grid">
-    <a class="highlight-card" href="https://kaken.nii.ac.jp/en/grant/KAKENHI-PROJECT-24K16420/">
-      <div class="highlight-label">2024–2027</div>
-      <div class="highlight-title">JSPS Grant-in-Aid for Early-Career Scientists JP24K16420</div>
-      <div class="highlight-meta">ESG practices and financial implications in the dynamic global socio-economic context</div>
-    </a>
-    <div class="highlight-card">
-      <div class="highlight-label">2016–2019</div>
-      <div class="highlight-title">Research Training Program in Decision Science for Sustainable Society</div>
-      <div class="highlight-meta">Kyushu University</div>
-    </div>
-    <div class="highlight-card">
-      <div class="highlight-label">2016</div>
-      <div class="highlight-title">Incentive Award for Young Researchers and Doctoral Students</div>
-      <div class="highlight-meta">Energy Research and Education Organization</div>
-    </div>
-  </div>
-</section>
-
-<section class="section">
-  <h2 class="section-title">Media & News</h2>
-  <div class="news-list">
-<div class="news-item"><div class="news-date">8 Jan 2026</div><div class="news-title">Doing good pays off: Environmentally and socially responsible companies drive value and market efficiency</div><a href="https://www.eurekalert.org/news-releases/1111140">Read more</a></div><div class="news-item"><div class="news-date">10 Dec 2024</div><div class="news-title">Better environmental performance boosts profits and cuts costs</div><a href="https://www.eurekalert.org/news-releases/1067513">Read more</a></div><div class="news-item"><div class="news-date">31 Oct 2024</div><div class="news-title">Press release of cooperating research (Japanese)</div><a href="https://www.peacemind.co.jp/newsrelease/archives/category/paper">Read more</a></div><div class="news-item"><div class="news-date">8 Jul 2024</div><div class="news-title">Companies that mitigate climate change reduce their cost of capital</div><a href="https://phys.org/news/2024-07-companies-mitigate-climate-capital.html">Read more</a></div><div class="news-item"><div class="news-date">7 Jul 2023</div><div class="news-title">Do investors incorporate financial materiality of environmental information in risk evaluation?</div><a href="https://www.eurekalert.org/news-releases/994838">Read more</a></div></div></section>
-    <footer class="footer">© Jun Xie</footer>
+    <footer class="landing-footer">© Jun Xie</footer>
   </div>
 </body>
 </html>
