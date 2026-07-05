@@ -87,17 +87,10 @@ a:hover { color: var(--accent-strong); }
   line-height: 1.18;
   text-align: center;
   color: var(--text);
-  background: linear-gradient(90deg, var(--accent-strong), #6aa9d6, var(--accent-strong));
-  -webkit-background-clip: text;
-  background-clip: text;
   white-space: nowrap;
 }
 
-@supports (-webkit-background-clip:text) {
-  .brand { color: transparent; }
-}
-
-.brand:hover { opacity: .9; text-decoration: none; }
+.brand:hover { opacity: .82; text-decoration: none; }
 
 .brand-sub {
   display: grid;
