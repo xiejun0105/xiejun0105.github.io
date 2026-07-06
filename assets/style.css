@@ -657,6 +657,11 @@ body.landing-page {
   color: var(--text);
   background: none;
 }
+.identity-links a:hover {
+  background: none;
+  color: var(--accent-strong);
+  transform: none;
+}
 .identity-links img,
 .identity-links svg {
   width: 19px;
@@ -675,7 +680,7 @@ body.landing-page {
   stroke: none;
 }
 .identity-links span {
-  color: var(--text);
+  color: inherit;
   font-size: 15px;
   font-weight: 700;
   line-height: 1;
