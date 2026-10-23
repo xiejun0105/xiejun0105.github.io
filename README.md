@@ -1,4 +1,15 @@
-# Welcome!
+# Jun Xie — personal website
 
+A static English, Japanese, and Chinese website published from this repository. The generated HTML remains in the repository, so GitHub Pages can serve it without a build service.
 
+## Update content
 
+- Add or edit a journal article in `data/journal-publications.json`. All three journal pages are generated from this one file. Keep the newest records first within each year.
+- The home page shows the first three records from `data/journal-publications.json` as recent publications.
+- Edit shared navigation and translated home section labels in `tools/build_site.py`.
+- Edit teaching content in the `data/teaching-course-*.html` and `data/teaching-supervision-*.html` fragments. The build combines them into each language's `/teaching/` page, with courses first and supervision second. Old `/teaching/course/` and `/teaching/supervision/` URLs redirect to the matching section.
+- Edit home policy covers in each language's `home/index.html`, detailed policy output lists in `data/misc-en.html`, `data/misc-ja.html`, and `data/misc-zh.html`, and funding in `data/funding.json`; the build creates the matching `/policy/` and `/funding/` detail pages. Policy detail pages group those output lists by type, with cover thumbnails mapped by DOI in `tools/build_site.py`. For current projects, `project_title` contains the official project title to show in each language; use the official Japanese title where available and English otherwise, without inventing translations. `title` is the funding program and `description` keeps the original project title. Set `representative` in all three languages and `my_role` to either `representative` or `co_investigator`. Funding records with a `timeline` object appear in the year-level overview; its `start`, `end`, and three language-specific `label` values also drive links to the project details below. Records without `timeline` appear under earlier funding and awards. Old MISC URLs redirect to Policy. Add news links and optional preview images in `data/news.json`; Blog content lives in `assets/blog-data.js` and its article pages.
+
+Run `python3 tools/build_site.py` after a data or navigation change, then commit the modified HTML. The script uses only the Python standard library. Existing public URLs stay in place.
+
+The root pages (`/`, `/ja/`, `/zh/`) begin with the profile card. Scrolling reveals a sticky navigation bar and the full home content, generated from each language's existing `/home/` page. Those older URLs remain available. The shared navigation order is Home, Publications, Projects, Teaching, Conference, Blog. The home page shows the five most recent publications, three policy reports, five news items, and the first three funding/project items, without introductory text beneath section headings. Publications and news each feature the latest item beside four smaller entries; all five news entries have thumbnails. The full chronological news archive is generated at `/news/`, `/ja/news/`, and `/zh/news/` from `data/news.json`. Each Teaching course has its own generated illustration: `assets/teaching-data-science.webp` and `assets/teaching-urban-design.webp`. The funding detail page shows all four current projects on a timeline, followed by all six records; Policy is reached through “See more”.

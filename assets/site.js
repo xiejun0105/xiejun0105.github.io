@@ -6,19 +6,28 @@
   root.setAttribute("data-theme", saved || (prefersDark ? "dark" : "light"));
 
   window.addEventListener("DOMContentLoaded", function () {
-    const btn = document.querySelector("[data-theme-toggle]");
-    if (btn) {
+    document.querySelectorAll(".news-thumb img").forEach((img) => {
+      function showFallback() { img.style.display = "none"; }
+      img.addEventListener("error", showFallback);
+      if (img.complete && !img.naturalWidth) showFallback();
+    });
+    const themeButtons = document.querySelectorAll("[data-theme-toggle]");
+    if (themeButtons.length) {
       function syncLabel() {
         const theme = root.getAttribute("data-theme");
-        btn.setAttribute("aria-label", theme === "dark" ? "Switch to warm light background" : "Switch to dark background");
-        btn.setAttribute("title", theme === "dark" ? "Warm light" : "Dark");
+        themeButtons.forEach((btn) => {
+          btn.setAttribute("aria-label", theme === "dark" ? "Switch to warm light background" : "Switch to dark background");
+          btn.setAttribute("title", theme === "dark" ? "Warm light" : "Dark");
+        });
       }
-      btn.addEventListener("click", function () {
-        const current = root.getAttribute("data-theme") || "light";
-        const next = current === "dark" ? "light" : "dark";
-        root.setAttribute("data-theme", next);
-        localStorage.setItem("theme", next);
-        syncLabel();
+      themeButtons.forEach((btn) => {
+        btn.addEventListener("click", function () {
+          const current = root.getAttribute("data-theme") || "light";
+          const next = current === "dark" ? "light" : "dark";
+          root.setAttribute("data-theme", next);
+          localStorage.setItem("theme", next);
+          syncLabel();
+        });
       });
       syncLabel();
     }
