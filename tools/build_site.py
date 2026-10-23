@@ -136,7 +136,7 @@ def funding_cards(locale):
             body = (
                 f'<div class="highlight-title">{escape(item["project_title"][locale])}</div>'
                 + project_roles(item, locale)
-                + f'<div class="highlight-grant">{escape(item["title"])}</div>'
+                + f'<div class="highlight-grant">{escape(item.get("title_ja", item["title"]) if locale == "ja" else item["title"])}</div>'
             )
         else:
             description = f'<div class="highlight-meta">{escape(item["description"])}</div>' if item.get('description') else ''
@@ -226,7 +226,7 @@ def funding_detail_section(locale):
     year_count = last_year - first_year + 1
     months = year_count * 12
     origin = first_year * 12 + 3
-    years = ''.join(f'<span>FY {year}<small>{year}.04–{year+1}.03</small></span>' for year in range(first_year, last_year + 1))
+    years = ''.join(f'<span>FY {year}</span>' for year in range(first_year, last_year + 1))
     rows = []
     details = []
     for number, entry in enumerate(projects, 1):
@@ -234,7 +234,7 @@ def funding_detail_section(locale):
         start = month_index(timing['start']) - origin + 1
         span = month_index(timing['end']) - month_index(timing['start']) + 1
         assert start > 0 and span > 0
-        title = escape(entry["title"])
+        title = escape(entry.get('title_ja', entry['title']) if locale == 'ja' else entry['title'])
         rows.append(
             f'<a class="funding-time-row tone-{number}" href="#project-{number}" aria-label="{title}, {escape(entry["period"])}">'
             f'<span class="funding-time-name">{title}</span>'
@@ -244,9 +244,9 @@ def funding_detail_section(locale):
         details.append(
             f'<article class="funding-detail-row" id="project-{number}">'
             f'<div class="funding-detail-period">{escape(entry["period"])}</div>'
-            f'<div><h4>{escape(entry["project_title"][locale])}</h4>{project_roles(entry, locale)}'
+            f'<div><h4><a href="{escape(entry["url"], quote=True)}">{escape(entry["project_title"][locale])}</a></h4>{project_roles(entry, locale)}'
             f'<p class="funding-grant-name">{title}</p>'
-            f'<a href="{escape(entry["url"], quote=True)}">{escape(labels["link"])} <span aria-hidden="true">↗</span></a></div></article>'
+            '</div></article>'
         )
     earlier_rows = ''.join(
         f'<div class="funding-earlier-row"><span>{escape(entry["period"])}</span><div><strong>{escape(entry["title"])}</strong>'

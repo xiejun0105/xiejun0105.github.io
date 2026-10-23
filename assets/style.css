@@ -14,12 +14,12 @@
 }
 
 html[data-theme="dark"] {
-  --bg: #181a1b;
-  --surface: rgba(31,34,36,.84);
-  --surface-2: #242729;
-  --text: #dce0e1;
-  --muted: #a2abad;
-  --line: #353b3e;
+  --bg: #141414;
+  --surface: rgba(29,29,29,.88);
+  --surface-2: #222222;
+  --text: #dedede;
+  --muted: #a6a6a6;
+  --line: #333333;
   --accent: #94b5c9;
   --accent-strong: #b9cfdb;
   --accent-soft: rgba(148,181,201,.1);
@@ -1564,7 +1564,6 @@ body { line-height: 1.68; }
 .funding-time-axis, .funding-time-row { display: grid; grid-template-columns: 205px minmax(0, 1fr); gap: 22px; }
 .funding-time-axis { margin-bottom: 9px; }
 .funding-years { display: grid; grid-template-columns: repeat(var(--timeline-years), minmax(0, 1fr)); }
-.funding-years small { display: block; font-size: 9px; font-weight: 400; margin-top: 4px; }
 .funding-years span { color: var(--muted); font-size: 12px; font-weight: 650; }
 .funding-time-row { min-height: 64px; align-items: center; color: var(--text); border-top: 1px solid color-mix(in srgb, var(--line) 65%, transparent); }
 .funding-time-row:last-child { border-bottom: 1px solid color-mix(in srgb, var(--line) 65%, transparent); }
@@ -1587,8 +1586,9 @@ html[data-theme="dark"] .tone-4 .funding-time-bar { color: #c4b1e2; }
 .funding-detail-period { color: var(--accent-strong); font-size: 14px; font-weight: 720; }
 .funding-detail-row h4 { margin: 0 0 7px; font-size: clamp(17px, 1.8vw, 20px); font-weight: 700; line-height: 1.4; }
 .funding-detail-row p { margin: 0 0 10px; color: var(--muted); font-size: 15px; }
-.funding-detail-row a { font-size: 13px; font-weight: 700; }
-.funding-detail-row a:hover { text-decoration: underline; text-underline-offset: 4px; }
+.funding-detail-row h4 a { font-size: inherit; font-weight: inherit; color: var(--text); }
+.funding-detail-row h4 a:hover { color: var(--accent-strong); }
+.funding-detail-row a:hover { text-decoration: none; }
 .funding-earlier-heading { margin-top: 54px; }
 .funding-earlier-list { border-top: 1px solid var(--line); }
 .funding-earlier-row { display: grid; grid-template-columns: 150px minmax(0, 1fr); gap: 28px; padding: 17px 0; border-bottom: 1px solid var(--line); }
@@ -1684,7 +1684,7 @@ html[data-theme="dark"] .tone-4 .funding-time-bar { color: #c4b1e2; }
 .policy-results .policy-result-cover { display: block; width: 82px; height: 108px; object-fit: contain; object-position: top right; }
 
 .teaching-page .course-row { grid-template-columns: 164px minmax(0, 1fr); gap: clamp(18px, 3vw, 34px); align-items: center; }
-.teaching-page .course-thumbnail { display: block; width: 164px; height: 110px; object-fit: cover; border-radius: 4px; }
+.teaching-page .course-thumbnail { display: block; width: 164px; height: 110px; object-fit: contain; padding: 6px; background: #fff; border: 1px solid var(--line); border-radius: 4px; }
 .teaching-page .course-copy { min-width: 0; }
 
 .news-page > .section-title { margin: 0 0 28px; padding: 0; border: 0; font-size: clamp(26px, 3vw, 32px); }
@@ -1765,8 +1765,7 @@ html[data-theme="dark"] .tone-4 .funding-time-bar { color: #c4b1e2; }
 .teaching-page .course-row + .course-row,
 .policy-results .policy-result + .policy-result,
 .news-archive .news-item + .news-item,
-.container:has(.conference-list) .conference-item + .conference-item,
-.teaching-page .supervision-list li + li {
+.container:has(.conference-list) .conference-item + .conference-item {
   border-top: 1px solid color-mix(in srgb, var(--line) 65%, transparent);
 }
 .news-archive .news-item:last-child { border-bottom: 0; }
@@ -1803,6 +1802,29 @@ html[data-theme="dark"] .tone-4 .funding-time-bar { color: #c4b1e2; }
   .teaching-page .teaching-section + .teaching-section { margin-top: 52px; }
   .container:has(.conference-list) .year-block + .year-block,
   .teaching-page .year-block + .year-block { margin-top: 32px; }
+}
+
+/* Teaching gives research titles more emphasis than year and degree labels. */
+.teaching-page .year-heading { font-size: 18px; line-height: 1.4; font-weight: 620; color: var(--accent-strong); margin-bottom: 20px; }
+.teaching-page .category-heading { font-size: 12px; line-height: 1.5; font-weight: 500; color: var(--muted); text-transform: none; letter-spacing: 0; margin: 28px 0 12px; }
+.teaching-page .supervision-list { gap: 0; }
+.teaching-page .supervision-list li { padding: 8px 0; line-height: 1.65; font-size: 16px; font-weight: 600; }
+.teaching-page .supervision-list li:first-child { padding-top: 0; }
+.supervision-publication { font-size: 12px; font-weight: 400; color: var(--muted); }
+.supervision-publication a { color: var(--accent); }
+.supervision-publication a:hover { color: var(--accent-strong); text-decoration: none; }
+.teaching-page .year-block + .year-block { margin-top: 12px; }
+.teaching-page .course-row { align-items: start; }
+.teaching-page .course-title { font-size: 20px; line-height: 1.4; font-weight: 620; margin-bottom: 8px; }
+.teaching-page .course-meta { color: var(--muted); font-size: 12px; }
+.course-facts { margin: 16px 0 0; display: grid; gap: 10px; font-size: 14px; line-height: 1.75; }
+.course-facts > div { display: grid; grid-template-columns: 84px minmax(0, 1fr); gap: 12px; }
+.course-facts dt { color: var(--muted); font-size: 12px; padding-top: 2px; }
+.course-facts dd { margin: 0; }
+@media (max-width: 560px) {
+  .teaching-page .course-row { grid-template-columns: minmax(0, 1fr); gap: 18px; }
+  .teaching-page .course-thumbnail { width: 164px; height: 110px; }
+  .course-facts > div { grid-template-columns: 70px minmax(0, 1fr); gap: 10px; }
 }
 
 /* Final shared scale keeps the existing content and layouts intact. */
