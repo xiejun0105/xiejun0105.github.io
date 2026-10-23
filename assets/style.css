@@ -1881,6 +1881,38 @@ h1, h2, h3, .brand, .brand-sub, .main-nav a, .nav-trigger,
 .blog-post { line-height: 1.85; }
 .blog-post p { margin-bottom: 1.35em; }
 .footer { margin-top: 64px; padding-top: 20px; }
+.institution-footer {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 20px 32px;
+  padding-top: 24px;
+  border-top: 1px solid var(--line);
+  font-size: 12px;
+  line-height: 1.6;
+}
+.footer-copyright { flex-shrink: 0; color: var(--muted); }
+.footer-institutions {
+  display: flex;
+  justify-content: flex-end;
+  flex-wrap: wrap;
+  gap: 10px 24px;
+  min-width: 0;
+}
+.footer-institutions a {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 5px;
+  color: var(--muted);
+  text-decoration: none;
+}
+.footer-institutions a span { font-size: 10px; opacity: .55; }
+.footer-institutions a:hover,
+.footer-institutions a:focus-visible { color: var(--accent-strong); text-decoration: none; }
+@media (max-width: 700px) {
+  .institution-footer { flex-direction: column; gap: 16px; }
+  .footer-institutions { justify-content: flex-start; gap: 12px 20px; }
+}
 @media (max-width: 560px) {
   .page-title { font-size: 26px; }
   .section-heading .section-title,

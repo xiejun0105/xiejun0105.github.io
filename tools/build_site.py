@@ -22,6 +22,29 @@ LANGUAGES = {
 }
 
 
+def site_footer(locale):
+    names = {
+        'en': ('Urban Institute', 'Managi Lab', 'Faculty of Engineering', 'Kyushu University'),
+        'ja': ('都市研究センター', '馬奈木研究室', '工学研究院', '九州大学'),
+        'zh': ('都市研究中心', '马奈木研究室', '工学研究院', '九州大学'),
+    }
+    urls = (
+        'https://urban-institute.kyushu-u.ac.jp/',
+        'https://www.managi-lab.com/',
+        'https://www.eng.kyushu-u.ac.jp/',
+        'https://www.kyushu-u.ac.jp/ja/',
+    )
+    label = {'en': 'Institution links', 'ja': '関連機関', 'zh': '关联机构'}[locale]
+    links = ''.join(
+        f'<a href="{url}">{escape(name)}<span aria-hidden="true">↗</span></a>'
+        for name, url in zip(names[locale], urls)
+    )
+    return (
+        '<footer class="footer institution-footer"><span class="footer-copyright">© Jun Xie</span>'
+        f'<nav class="footer-institutions" aria-label="{label}">{links}</nav></footer>'
+    )
+
+
 def nav(locale, current):
     item = LANGUAGES[locale]
     prefix = item["prefix"]
@@ -443,7 +466,7 @@ for locale in ("en", "ja", "zh"):
         '<link rel="canonical" href="' + prefix + '/policy/"></head><body><p><a href="' + prefix + '/policy/">Policy</a></p></body></html>\n'
     )
     start = home.index('<!-- featured-publications:start -->')
-    end = home.index('<footer class="footer">', start)
+    end = home.index('<footer class="footer', start)
     home_content = home[start:end].strip()
     languages = [("EN", "/"), ("日本語", "/ja/"), ("中文", "/zh/")]
     language_links = ' '.join(
@@ -480,3 +503,14 @@ for locale in ("en", "ja", "zh"):
     )
     assert count == 1, landing_path
     landing_path.write_text(landing)
+
+# Apply shared footers after generated sections and landing pages are assembled.
+for path in ROOT.rglob('*.html'):
+    if '.git' in path.parts or '・My publications' in path.parts:
+        continue
+    relative = path.relative_to(ROOT)
+    locale = relative.parts[0] if relative.parts[0] in ('ja', 'zh') else 'en'
+    source = path.read_text()
+    updated = re.sub(r'<footer class="footer(?: institution-footer)?">.*?</footer>', site_footer(locale), source, flags=re.S)
+    if updated != source:
+        path.write_text(updated)
