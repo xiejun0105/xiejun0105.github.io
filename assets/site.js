@@ -16,8 +16,8 @@
       function syncLabel() {
         const theme = root.getAttribute("data-theme");
         themeButtons.forEach((btn) => {
-          btn.setAttribute("aria-label", theme === "dark" ? "Switch to warm light background" : "Switch to dark background");
-          btn.setAttribute("title", theme === "dark" ? "Warm light" : "Dark");
+          btn.setAttribute("aria-label", theme === "dark" ? "Switch to light background" : "Switch to dark background");
+          btn.setAttribute("title", theme === "dark" ? "Light" : "Dark");
         });
       }
       themeButtons.forEach((btn) => {

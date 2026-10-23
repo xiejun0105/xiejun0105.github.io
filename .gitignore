@@ -1,0 +1,5 @@
+# Local research library; publish only explicitly selected derived assets.
+/・My publications/
+/tmp/
+__pycache__/
+.DS_Store

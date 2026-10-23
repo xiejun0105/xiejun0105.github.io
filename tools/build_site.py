@@ -10,6 +10,7 @@ import re
 
 ROOT = Path(__file__).resolve().parents[1]
 JOURNAL = json.loads((ROOT / "data/journal-publications.json").read_text())
+THUMBNAILS = json.loads((ROOT / "data/paper-thumbnails.json").read_text())
 PAPERS = JOURNAL[:5]
 FUNDING = json.loads((ROOT / "data/funding.json").read_text())
 NEWS = json.loads((ROOT / "data/news.json").read_text())
@@ -59,6 +60,13 @@ def shared_header(locale, current, suffix=()):
     )
 
 
+def paper_image(paper, css_class):
+    thumbnail = THUMBNAILS.get(paper['doi'])
+    if not thumbnail:
+        return ''
+    return f'<span class="{css_class}"><img src="{escape(thumbnail["image"], quote=True)}" alt="Figure from {escape(paper["title"], quote=True)}" loading="lazy" decoding="async"></span>'
+
+
 def home_sections(locale):
     item = LANGUAGES[locale]
     prefix = item["prefix"]
@@ -67,6 +75,7 @@ def home_sections(locale):
         # DOI pages are the authoritative destination; the local bibliography remains one click away.
         cards.append(
             f'<a class="selected-paper-card {"spotlight-lead" if number == 0 else "spotlight-secondary"}" href="https://doi.org/{escape(paper["doi"], quote=True)}">'
+            + paper_image(paper, 'selected-paper-image') +
             f'<div class="selected-paper-copy"><span class="selected-paper-meta">{paper["year"]} · {escape(paper["journal"])}</span>'
             f'<h3>{escape(paper["title"])}</h3><span class="selected-paper-action">DOI ↗</span></div></a>'
         )
@@ -92,9 +101,11 @@ def journal_timeline():
             doi = escape(paper["doi"], quote=True)
             note = f'<div class="pub-doi">{escape(paper["note"])}</div>' if paper.get("note") else ''
             entries.append(
-                f'<li class="pub-item"><div><span class="pub-meta">{authors}</span> '
+                f'<li class="pub-item publication-with-image">'
+                f'<a class="publication-image-link" href="https://doi.org/{doi}" aria-label="Open article: {escape(paper["title"], quote=True)}">{paper_image(paper, "publication-image")}</a>'
+                f'<div class="publication-copy"><div><span class="pub-meta">{authors}</span> '
                 f'<span class="pub-title">{escape(paper["title"])}</span>. <em>{escape(paper["journal"])}</em>.</div>'
-                f'<div class="pub-doi"><a href="https://doi.org/{doi}">https://doi.org/{escape(paper["doi"])}</a></div>{note}</li>'
+                f'<div class="pub-doi"><a href="https://doi.org/{doi}">https://doi.org/{escape(paper["doi"])}</a></div>{note}</div></li>'
             )
         blocks.append(f'<section class="year-block" id="year-{year}" data-year-section><h2 class="year-heading">{year}</h2><ul class="pub-list">{"".join(entries)}</ul></section>')
     return f'<nav class="timeline-nav" aria-label="Year navigation">{links}</nav><div class="timeline-content">{"".join(blocks)}</div>'
@@ -202,22 +213,33 @@ def funding_detail_section(locale):
     labels = FUNDING_TEXT[locale]
     projects = [entry for entry in FUNDING if "timeline" in entry]
     earlier = [entry for entry in FUNDING if "timeline" not in entry]
-    first_year = min(entry["timeline"]["start"] for entry in projects)
-    last_year = max(entry["timeline"]["end"] for entry in projects)
-    years = ''.join(f'<span>{year}</span>' for year in range(first_year, last_year + 1))
+    def month_index(value):
+        year, month = map(int, value[:7].split('-'))
+        return year * 12 + month - 1
+
+    def fiscal_year(value):
+        year, month = map(int, value[:7].split('-'))
+        return year if month >= 4 else year - 1
+
+    first_year = min(fiscal_year(entry['timeline']['start']) for entry in projects)
+    last_year = max(fiscal_year(entry['timeline']['end']) for entry in projects)
+    year_count = last_year - first_year + 1
+    months = year_count * 12
+    origin = first_year * 12 + 3
+    years = ''.join(f'<span>FY {year}<small>{year}.04–{year+1}.03</small></span>' for year in range(first_year, last_year + 1))
     rows = []
     details = []
     for number, entry in enumerate(projects, 1):
         timing = entry["timeline"]
-        start = timing["start"] - first_year + 1
-        span = timing["end"] - timing["start"] + 1
+        start = month_index(timing['start']) - origin + 1
+        span = month_index(timing['end']) - month_index(timing['start']) + 1
         assert start > 0 and span > 0
         title = escape(entry["title"])
         rows.append(
             f'<a class="funding-time-row tone-{number}" href="#project-{number}" aria-label="{title}, {escape(entry["period"])}">'
             f'<span class="funding-time-name">{title}</span>'
-            f'<span class="funding-time-track"><span class="funding-time-bar" style="--bar-start:{start};--bar-span:{span}">'
-            f'{escape(timing["label"][locale])}</span></span></a>'
+            f'<span class="funding-time-track"><span class="funding-time-bar" style="--bar-start:{start};--bar-span:{span}" title="{escape(entry["project_title"][locale], quote=True)} · {escape(timing["start"])} – {escape(timing["end"])}">'
+            f'{escape(entry["project_title"][locale])}</span></span></a>'
         )
         details.append(
             f'<article class="funding-detail-row" id="project-{number}">'
@@ -233,9 +255,9 @@ def funding_detail_section(locale):
     )
     return (
         '<section class="section funding-page">'
-        f'<div class="funding-overview-heading"><h2>{escape(labels["timeline"])}</h2><p>{escape(labels["timing"])}</p></div>'
+        f'<div class="funding-overview-heading"><h2>{escape(labels["timeline"])}</h2><p>{escape({"en": "Japanese fiscal year · Apr–Mar", "ja": "日本の会計年度 · 4月–翌年3月", "zh": "日本财政年度 · 4月至次年3月"}[locale])}</p></div>'
         f'<div class="funding-timeline-scroll" role="region" tabindex="0" aria-label="{escape(labels["chart"], quote=True)}">'
-        '<div class="funding-timeline-inner"><div class="funding-time-axis"><span></span>'
+        f'<div class="funding-timeline-inner" style="--timeline-years:{year_count};--timeline-months:{months}"><div class="funding-time-axis"><span></span>'
         f'<div class="funding-years">{years}</div></div>{"".join(rows)}</div></div>'
         f'<h2 class="funding-list-heading">{escape(labels["projects"])}</h2>'
         f'<div class="funding-detail-list">{"".join(details)}</div>'
