@@ -151,11 +151,13 @@
 
         list.innerHTML = visiblePosts.map((post) => `
           <a class="blog-index-card" href="${escapeHtml(post.href)}">
-            <div class="blog-index-image"><img src="${escapeHtml(post.image)}" alt=""></div>
             <div class="blog-index-body">
-              <div class="blog-card-meta">${escapeHtml(post.tag)}</div>
               <h2>${escapeHtml(post.title)}</h2>
-              <p>${escapeHtml(post.excerpt)}</p>
+              <div class="blog-card-meta">${escapeHtml(post.tag)}</div>
+              <div class="blog-index-excerpt">
+                <span class="blog-index-image"><img src="${escapeHtml(post.image)}" alt="" loading="lazy" decoding="async"></span>
+                <p>${escapeHtml(post.excerpt)}</p>
+              </div>
               <span class="blog-card-status">${escapeHtml(post.status)}</span>
             </div>
           </a>

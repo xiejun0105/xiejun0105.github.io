@@ -1772,33 +1772,46 @@ html[data-theme="dark"] .tone-4 .funding-time-bar { color: #c4b1e2; }
 .container:has(.conference-list) .year-block + .year-block,
 .teaching-page .year-block + .year-block { margin-top: 44px; }
 .teaching-page .teaching-section + .teaching-section { margin-top: 72px; }
-.blog-card-grid { grid-template-columns: minmax(0, 1fr); gap: 0; }
+.blog-card-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); grid-auto-rows: 1fr; gap: 32px 28px; }
 .blog-card-grid .blog-index-card {
-  grid-template-columns: 240px minmax(0, 1fr);
-  gap: 28px;
-  min-height: 0;
-  padding: 28px 0;
+  display: block;
+  min-height: 260px;
+  padding: 0;
   border: 0;
   border-radius: 0;
-  align-items: start;
+  box-shadow: none;
+  background: none;
+  align-items: stretch;
 }
 .blog-card-grid .blog-index-card:first-child { padding-top: 0; }
 .blog-card-grid .blog-index-card + .blog-index-card {
-  border-top: 1px solid color-mix(in srgb, var(--line) 65%, transparent);
+  border-top: 0;
 }
 .blog-card-grid .blog-index-image {
-  height: 164px;
+  position: relative;
+  display: block;
+  width: 128px;
+  height: 96px;
+  margin: 0;
   min-height: 0;
   border: 0;
-  border-radius: 4px;
+  border-radius: 0;
   overflow: hidden;
 }
-.blog-card-grid .blog-index-image img { object-fit: contain; }
+.blog-card-grid .blog-index-image img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center; }
 .blog-card-grid .blog-index-body { padding: 0; min-width: 0; }
-.blog-card-grid .blog-index-body p { line-height: 1.75; margin-bottom: 12px; }
+.blog-card-grid .blog-index-body h2 { margin-bottom: 10px; }
+.blog-card-grid .blog-card-meta { margin-bottom: 16px; }
+.blog-index-excerpt { display: grid; grid-template-columns: 128px minmax(0, 1fr); gap: 18px; align-items: start; }
+.blog-card-grid .blog-index-body p { line-height: 1.75; margin: 0; }
+.blog-card-grid .blog-card-status { display: block; margin-top: 14px; }
+@media (max-width: 760px) {
+  .blog-card-grid { grid-template-columns: minmax(0, 1fr); gap: 28px; }
+}
 @media (max-width: 560px) {
-  .blog-card-grid .blog-index-card { grid-template-columns: minmax(0, 1fr); gap: 18px; padding: 24px 0; }
-  .blog-card-grid .blog-index-image { height: 200px; }
+  .blog-card-grid .blog-index-card { padding: 0; }
+  .blog-card-grid .blog-index-image { width: 112px; height: 84px; }
+  .blog-index-excerpt { grid-template-columns: 112px minmax(0, 1fr); gap: 14px; }
   .teaching-page .teaching-section + .teaching-section { margin-top: 52px; }
   .container:has(.conference-list) .year-block + .year-block,
   .teaching-page .year-block + .year-block { margin-top: 32px; }
