@@ -25,6 +25,8 @@ of their data or HTML fragments. Preserve unrelated worktree changes.
 - Run `python3 tools/build_site.py` after changing generated content or shared
   chrome, then `python3 tools/check_site.py --report tmp/site-audit.json`, the
   focused unit tests, both JavaScript syntax checks and `git diff --check`.
+  Also syntax-check `assets/analytics.js`. Use only the shared analytics loader;
+  preserve production-host and privacy guards, and never send fake test pageviews.
 - Review affected desktop/mobile and light/dark views when browser access is
   available. State clearly when visual verification could not be performed.
 - Archive the final article after integration; keep editorial notes locally and

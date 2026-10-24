@@ -8,6 +8,8 @@ from pathlib import Path
 import json
 import re
 
+from site_analytics import with_analytics
+
 ROOT = Path(__file__).resolve().parents[1]
 LOCAL_ONLY_DIRS = {'.git', '・My publications', '・Blog draft', '・Site archive', 'tmp'}
 JOURNAL = json.loads((ROOT / "data/journal-publications.json").read_text())
@@ -516,5 +518,6 @@ for path in ROOT.rglob('*.html'):
     locale = relative.parts[0] if relative.parts[0] in ('ja', 'zh') else 'en'
     source = path.read_text()
     updated = re.sub(r'<footer class="footer(?: institution-footer)?">.*?</footer>', site_footer(locale), source, flags=re.S)
+    updated = with_analytics(updated)
     if updated != source:
         path.write_text(updated)

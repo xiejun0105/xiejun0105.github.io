@@ -34,6 +34,7 @@
 | Blog 正文、素材映射 | `blog/<slug>/index.html`、`data/blog-assets.json` |
 | 会议记录 | `conference/index.html` 及三语对应页，目前直接维护 HTML |
 | 全站样式与交互 | `assets/style.css`、`assets/site.js` |
+| 访问统计 | `assets/analytics.js`；`tools/site_analytics.py` 负责统一接入 |
 
 - `tools/build_site.py` 生成三语共享导航、页脚、论文列表、首页相关区块、项目与课程页面。
 - 课程/指导/其他成果的 `data/*.html` 是人工维护的片段，不是可以删除的构建残留。
@@ -105,6 +106,7 @@ python3 tools/check_site.py --report tmp/site-audit.json
 python3 -m unittest discover -s tools -p 'test_*.py'
 node --check assets/site.js
 node --check assets/blog-data.js
+node --check assets/analytics.js
 git diff --check
 ```
 
@@ -157,3 +159,23 @@ python3 tools/archive-site-assets.py images/unused-example.png \
 不把检查报告或候选资源清单提交为新的公开内容，不宣称未执行的远程部署成功。
 
 交付前明确：改了什么、检查结果、保留了哪些必要提醒、历史存在哪里、是否已经推送。
+
+## 9. 访问统计维护
+
+- 服务：GoatCounter 官方托管版；后台为 `https://junxie.goatcounter.com/`，需账户登录。
+- 统计接口：`https://junxie.goatcounter.com/count`，这是公开接入标识，不是后台密码或 API 密钥。
+- `assets/analytics.js` 是唯一配置入口；不要逐篇粘贴第三方脚本。
+- 构建脚本自动向完整的正式 HTML 加入一个共享加载器；跳过数据片段与重定向页，防止重复计数。
+- 只在 HTTPS 正式域名 `xiejun0105.github.io` 加载第三方代码；本地预览、其他域名不加载。
+- 若未来使用自定义域名，需明确修改正式域名判断并补测试，不能未经检查放开所有来源。
+- 只记录页面访问，不绑定自动点击事件；移除路径查询参数，`/index.html` 归并到 `/`。
+- 来源仅提交来源站点的 origin，不传来源路径或查询参数；地区由服务端按 IP 估算。
+- 尊重浏览器 Do Not Track 和 Global Privacy Control 信号；这会减少计数，属于预期行为。
+- 第三方脚本被拦截或服务不可用时，页面内容和导航不依赖它，也不试图绕过用户的拦截器。
+- 后台私有可见性、是否收集地区、逐次访问明细是否关闭，必须由账号持有人在 GoatCounter 设置中确认；网站代码无法代替后台设置。
+- 排除自己的正式站访问可用官方的 `#toggle-goatcounter` 入口，确认后按提示操作；不同浏览器或设备需分别设置。
+- 建议每月查看一次，按需季度导出；不要为简单统计额外搭建服务器或公开阅读计数。
+- 代码和离线测试不证明后台已收到真实访问；部署后由持有人登录后台核对，不能伪造测试访问量。
+- 只有正式网站部署完成后才会开始记录新访问，不能补回未统计的历史数据。
+
+官方参考：[接入](https://www.goatcounter.com/help/start)、[JavaScript 设置](https://www.goatcounter.com/help/js)、[排除自己的访问](https://www.goatcounter.com/help/skip-dev)。

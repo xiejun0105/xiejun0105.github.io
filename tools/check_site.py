@@ -15,6 +15,8 @@ import re
 import subprocess
 from urllib.parse import unquote, urlsplit
 
+from site_analytics import PageType
+
 
 ROOT = Path(__file__).resolve().parents[1]
 PRIVATE = {'・Blog draft', '・My publications', '・Site archive', 'tmp'}
@@ -99,6 +101,12 @@ def audit(root):
             pages[str(source.relative_to(root))] = parser
             for value in parser.references:
                 reference(source, value)
+            if (root / 'assets/analytics.js').is_file():
+                page_type = PageType()
+                page_type.feed(source.read_text())
+                if page_type.has_head and page_type.has_body and not page_type.redirect:
+                    if parser.references.count('/assets/analytics.js') != 1:
+                        errors.append(f'{source.relative_to(root)}: run build to include exactly one shared analytics loader')
         elif source.suffix == '.css':
             for value in re.findall(r'url\(\s*[\'"]?([^\)\'\"]+)', source.read_text()):
                 reference(source, value.strip())

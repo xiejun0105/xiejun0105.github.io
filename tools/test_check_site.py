@@ -84,6 +84,13 @@ class SiteAuditTests(unittest.TestCase):
         self.put('data/blog-assets.json', '{invalid')
         self.assertTrue(any('invalid JSON' in x for x in audit(self.root)['errors']))
 
+    def test_full_page_requires_shared_analytics_when_configured(self):
+        self.put('assets/analytics.js', '// test loader')
+        self.put('index.html', '<html><head></head><body>Home</body></html>')
+        self.assertTrue(any('shared analytics loader' in x for x in audit(self.root)['errors']))
+        self.put('index.html', '<html><head><script defer src="/assets/analytics.js"></script></head><body>Home</body></html>')
+        self.assertEqual(audit(self.root)['errors'], [])
+
     def archive(self, *paths):
         spec = importlib.util.spec_from_file_location('archive_assets_test', Path(__file__).with_name('archive-site-assets.py'))
         module = importlib.util.module_from_spec(spec)
