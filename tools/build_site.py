@@ -9,6 +9,7 @@ import json
 import re
 
 ROOT = Path(__file__).resolve().parents[1]
+LOCAL_ONLY_DIRS = {'.git', '・My publications', '・Blog draft', '・Site archive', 'tmp'}
 JOURNAL = json.loads((ROOT / "data/journal-publications.json").read_text())
 THUMBNAILS = json.loads((ROOT / "data/paper-thumbnails.json").read_text())
 PAPERS = JOURNAL[:5]
@@ -178,7 +179,8 @@ def news_item(item, variant):
         f'<img src="{escape(item["image"], quote=True)}" alt="" loading="lazy">'
         if item.get("image") else ''
     )
-    thumbnail = f'<span class="news-thumb" aria-hidden="true"><span>{escape(item["fallback"])}</span>{image}</span>'
+    image_class = ' news-thumb-logo' if item.get('imageType') == 'logo' else ''
+    thumbnail = f'<span class="news-thumb{image_class}" aria-hidden="true"><span>{escape(item["fallback"])}</span>{image}</span>'
     return (
         f'<div class="news-item news-{variant}">'
         f'<a class="news-bookmark" href="{escape(item["url"], quote=True)}">'
@@ -290,7 +292,7 @@ def funding_detail_section(locale):
 
 
 for path in ROOT.rglob("*.html"):
-    if ".git" in path.parts:
+    if LOCAL_ONLY_DIRS.intersection(path.parts):
         continue
     relative = path.relative_to(ROOT)
     locale = relative.parts[0] if relative.parts[0] in ("ja", "zh") else "en"
@@ -298,6 +300,8 @@ for path in ROOT.rglob("*.html"):
     section = suffix[0] if len(suffix) > 1 else "home"
     current = "papers" if section == "publications" else "projects" if section == "funding" else "teaching" if section == "teaching" else "blog" if section == "blog" else "conference" if section == "conference" else "home" if section == "home" else None
     source = path.read_text()
+    if section == 'blog' and '<main class="blog-post">' in source and '/assets/blog-data.js' not in source:
+        source = re.sub(r'(<script src="[^"]*assets/site\.js"></script>)', '<script src="/assets/blog-data.js"></script>\n  ' + r'\1', source, count=1)
     if '<!-- shared-header:start -->' in source:
         source, count = re.subn(r'<!-- shared-header:start -->.*?<!-- shared-header:end -->', '<!-- shared-header:start -->\n' + shared_header(locale, current, suffix[:-1]) + '\n<!-- shared-header:end -->', source, count=1, flags=re.S)
         assert count == 1, path
@@ -506,7 +510,7 @@ for locale in ("en", "ja", "zh"):
 
 # Apply shared footers after generated sections and landing pages are assembled.
 for path in ROOT.rglob('*.html'):
-    if '.git' in path.parts or '・My publications' in path.parts:
+    if LOCAL_ONLY_DIRS.intersection(path.parts):
         continue
     relative = path.relative_to(ROOT)
     locale = relative.parts[0] if relative.parts[0] in ('ja', 'zh') else 'en'

@@ -1,0 +1,49 @@
+{
+  "about-me": {
+    "page": "/blog/about-me/",
+    "cover": "/blog/about-me/assets/research-topics-wordcloud.webp",
+    "images": ["/blog/about-me/assets/research-topics-wordcloud.webp"]
+  },
+  "corporate-sustainability-firm-value": {
+    "page": "/blog/corporate-sustainability-firm-value/",
+    "cover": "/images/Xie_2023_materiality_map.png",
+    "images": [
+      "/images/Xie_2019_nonlinear.png",
+      "/images/Xie_2023_materiality_map.png"
+    ]
+  },
+  "human-capital-well-being": {
+    "page": "/blog/human-capital-well-being/",
+    "cover": "/images/Xie_2025_stress_cluster.png",
+    "images": [
+      "/images/Xie_2023_uneven_high_stress_risk.png",
+      "/images/Xie_2025_stress_cluster.png",
+      "/images/Xie_2024_female_manager.png"
+    ]
+  },
+  "macro-sustainability-inclusive-wealth": {
+    "page": "/blog/macro-sustainability-inclusive-wealth/",
+    "cover": "/images/Chen_2025_global_HC_change.png",
+    "images": [
+      "/images/Chen_2025_global_HC_change.png",
+      "/images/Xie_2025_different_ESG_financial_impact.png"
+    ]
+  },
+  "climate-change": {
+    "page": "/blog/climate-change/",
+    "cover": "/images/Keeley_2026_TCFD.png",
+    "images": [
+      "/images/Chen_2025_paris_agreement.png",
+      "/images/Yoshida_2025_green_MA.png",
+      "/images/Keeley_2026_TCFD.png"
+    ]
+  },
+  "supply-chain": {
+    "page": "/blog/supply-chain/",
+    "cover": "/images/Xie_2026_supplychain_relation.png",
+    "images": [
+      "/images/Xie_2026_club.png",
+      "/images/Xie_2026_supplychain_relation.png"
+    ]
+  }
+}

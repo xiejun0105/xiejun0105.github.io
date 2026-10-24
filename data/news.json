@@ -4,7 +4,8 @@
     "title": "AI helps reveal what sustainability issues companies emphasize",
     "url": "https://www.eurekalert.org/news-releases/1148183",
     "source": "EurekAlert!",
-    "image": "https://www.kyushu-u.ac.jp/f/67597/20261015_Fuji_Fig.jpg",
+    "image": "/images/news/2026-10-19-sustainability-information.jpg",
+    "imageSource": "https://www.kyushu-u.ac.jp/f/67597/20261015_Fuji_Fig.jpg",
     "fallback": "KU"
   },
   {
@@ -12,7 +13,8 @@
     "title": "Doing good pays off: Environmentally and socially responsible companies drive value and market efficiency",
     "url": "https://www.eurekalert.org/news-releases/1111140",
     "source": "EurekAlert!",
-    "image": "https://scx1.b-cdn.net/csz/news/800a/2026/doing-good-pays-off-en.jpg",
+    "image": "/images/news/2026-01-08-esg-market-efficiency.jpg",
+    "imageSource": "https://scx1.b-cdn.net/csz/news/800a/2026/doing-good-pays-off-en.jpg",
     "fallback": "KU"
   },
   {
@@ -20,7 +22,8 @@
     "title": "Better environmental performance boosts profits and cuts costs",
     "url": "https://www.eurekalert.org/news-releases/1067513",
     "source": "EurekAlert!",
-    "image": "https://scx1.b-cdn.net/csz/news/800a/2024/better-environmental-p.jpg",
+    "image": "/images/news/2024-12-10-environmental-performance.jpg",
+    "imageSource": "https://scx1.b-cdn.net/csz/news/800a/2024/better-environmental-p.jpg",
     "fallback": "KU"
   },
   {
@@ -28,6 +31,9 @@
     "title": "Press release of cooperating research (Japanese)",
     "url": "https://www.peacemind.co.jp/newsrelease/archives/category/paper",
     "source": "PeaceMind",
+    "image": "/images/news/peacemind-logo.png",
+    "imageSource": "https://ferret-one.akamaized.net/images/63193b2c845d8041b08f9673/original.png?utime=1662597932",
+    "imageType": "logo",
     "fallback": "PM"
   },
   {
@@ -35,7 +41,8 @@
     "title": "Companies that mitigate climate change reduce their cost of capital",
     "url": "https://phys.org/news/2024-07-companies-mitigate-climate-capital.html",
     "source": "Phys.org",
-    "image": "https://scx1.b-cdn.net/csz/news/800a/2024/companies-that-mitigat.jpg",
+    "image": "/images/news/2024-07-08-climate-cost-of-capital.jpg",
+    "imageSource": "https://scx1.b-cdn.net/csz/news/800a/2024/companies-that-mitigat.jpg",
     "fallback": "KU"
   },
   {
@@ -43,7 +50,8 @@
     "title": "Do investors incorporate financial materiality of environmental information in risk evaluation?",
     "url": "https://www.eurekalert.org/news-releases/994838",
     "source": "EurekAlert!",
-    "image": "https://scx1.b-cdn.net/csz/news/800a/2023/do-investors-incorpora.jpg",
+    "image": "/images/news/2023-07-07-environmental-materiality.jpg",
+    "imageSource": "https://scx1.b-cdn.net/csz/news/800a/2023/do-investors-incorpora.jpg",
     "fallback": "KU"
   }
 ]

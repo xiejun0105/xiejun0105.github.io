@@ -14,6 +14,8 @@ def normalized(value):
 
 def main():
     papers = json.loads((ROOT / 'data/journal-publications.json').read_text())
+    mapping_path = ROOT / 'data/paper-thumbnails.json'
+    previous = json.loads(mapping_path.read_text()) if mapping_path.exists() else {}
     documents = []
     for path in (ROOT / '・My publications').glob('*.pdf'):
         doc = fitz.open(path)
@@ -34,6 +36,10 @@ def main():
     mapping = {}
     for paper in papers:
         doi = paper['doi']
+        selected = previous.get(doi)
+        if selected and (ROOT / selected['image'].lstrip('/')).is_file():
+            mapping[doi] = selected
+            continue
         if doi in reuse:
             mapping[doi] = {'image': '/images/' + reuse[doi], 'selection': 'Existing curated blog figure'}
             continue
@@ -70,11 +76,13 @@ def main():
             continue
         _, index, box = max(candidates,key=lambda item:item[0])
         clip = (box+(-8,-8,8,8)) & doc[index].rect
-        slug = re.sub(r'[^a-zA-Z0-9]+','-',doi).strip('-')+'.png'
+        author = re.sub(r'[^a-zA-Z0-9]', '', paper['authors'].split(',')[0])
+        description = re.sub(r'[^a-zA-Z0-9]+', '_', paper['title']).strip('_').lower()[:90].rstrip('_')
+        slug = f"{author}_{paper['year']}_{description}.png"
         doc[index].get_pixmap(matrix=fitz.Matrix(1.7,1.7),clip=clip,alpha=False).save(output/slug)
         mapping[doi] = {'image': '/images/papers/'+slug, 'page': index+1, 'selection': 'Color / framework candidate; source figure region'}
         print('EXPORTED',doi,'page',index+1)
-    (ROOT/'data/paper-thumbnails.json').write_text(json.dumps(mapping,ensure_ascii=False,indent=2)+'\n')
+    mapping_path.write_text(json.dumps(mapping,ensure_ascii=False,indent=2)+'\n')
     print('Mapped',len(mapping),'of',len(papers))
 
 

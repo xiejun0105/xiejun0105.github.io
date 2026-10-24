@@ -580,7 +580,7 @@ body.landing-page {
   min-height: 100vh;
   background: var(--bg);
 }
-body.landing-page .scroll-home-nav { background: var(--bg); }
+body.landing-page .scroll-home-nav { background: var(--nav-background, var(--bg)); }
 .landing-shell {
   width: min(100%, 1180px);
   min-height: 100vh;
@@ -1363,7 +1363,39 @@ body { font-weight: 480; }
 /* Editorial layout shared by home and interior pages. */
 :root { --max: 1060px; }
 body { line-height: 1.68; }
-.scroll-home-nav { box-shadow: none; }
+.scroll-home-nav {
+  --nav-background: var(--bg);
+  background: var(--nav-background);
+  border-bottom-color: transparent;
+  -webkit-backdrop-filter: none;
+  backdrop-filter: none;
+  box-shadow: none;
+  transition: background-color .22s ease, border-color .22s ease;
+}
+.scroll-home-nav.is-scrolled {
+  border-bottom-color: color-mix(in srgb, var(--line) 55%, transparent);
+}
+@supports ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+  .scroll-home-nav.is-scrolled {
+    --nav-background: rgba(244,245,245,.72);
+    -webkit-backdrop-filter: blur(18px) saturate(110%);
+    backdrop-filter: blur(18px) saturate(110%);
+  }
+  html[data-theme="dark"] .scroll-home-nav.is-scrolled {
+    --nav-background: rgba(20,20,20,.74);
+  }
+}
+@media (prefers-reduced-transparency: reduce) {
+  .scroll-home-nav.is-scrolled {
+    --nav-background: var(--bg);
+    -webkit-backdrop-filter: none;
+    backdrop-filter: none;
+  }
+  html[data-theme="dark"] .scroll-home-nav.is-scrolled { --nav-background: var(--bg); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .scroll-home-nav { transition: none; }
+}
 .scroll-home-content, .detail-container { padding-top: 46px; }
 .scroll-home-content main > .section { margin-top: 76px; }
 .scroll-home-content main > .section:first-child { margin-top: 0; }
@@ -1628,6 +1660,8 @@ html[data-theme="dark"] .tone-4 .funding-time-bar { color: #c4b1e2; }
 .news-bookmark:hover .news-title, .news-bookmark:focus-visible .news-title { color: var(--accent-strong); }
 .news-thumb { position: relative; display: grid; place-items: center; width: 112px; height: 90px; overflow: hidden; border-radius: 7px; background: var(--accent-soft); color: var(--accent-strong); font-size: 19px; font-weight: 760; letter-spacing: .06em; }
 .news-thumb img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; transition: transform .2s ease; }
+.news-thumb.news-thumb-logo { background: #fff; }
+.news-thumb-logo img { object-fit: contain; padding: 8px; background: #fff; }
 .news-bookmark:hover .news-thumb img { transform: scale(1.04); }
 @media (max-width: 780px) {
   .news-section .news-list { grid-template-columns: 1fr; }
@@ -1772,10 +1806,10 @@ html[data-theme="dark"] .tone-4 .funding-time-bar { color: #c4b1e2; }
 .container:has(.conference-list) .year-block + .year-block,
 .teaching-page .year-block + .year-block { margin-top: 44px; }
 .teaching-page .teaching-section + .teaching-section { margin-top: 72px; }
-.blog-card-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); grid-auto-rows: 1fr; gap: 32px 28px; }
+.blog-card-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); grid-auto-rows: auto; gap: 48px 32px; align-items: start; margin-top: 32px; }
 .blog-card-grid .blog-index-card {
   display: block;
-  min-height: 260px;
+  min-height: 0;
   padding: 0;
   border: 0;
   border-radius: 0;
@@ -1790,28 +1824,34 @@ html[data-theme="dark"] .tone-4 .funding-time-bar { color: #c4b1e2; }
 .blog-card-grid .blog-index-image {
   position: relative;
   display: block;
-  width: 128px;
-  height: 96px;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 3 / 1;
   margin: 0;
   min-height: 0;
   border: 0;
-  border-radius: 0;
+  border-radius: 4px;
+  background: #fff;
   overflow: hidden;
+  -webkit-mask-image: linear-gradient(to bottom, #000 75%, transparent 100%);
+  mask-image: linear-gradient(to bottom, #000 75%, transparent 100%);
 }
 .blog-card-grid .blog-index-image img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center; }
-.blog-card-grid .blog-index-body { padding: 0; min-width: 0; }
-.blog-card-grid .blog-index-body h2 { margin-bottom: 10px; }
-.blog-card-grid .blog-card-meta { margin-bottom: 16px; }
-.blog-index-excerpt { display: grid; grid-template-columns: 128px minmax(0, 1fr); gap: 18px; align-items: start; }
-.blog-card-grid .blog-index-body p { line-height: 1.75; margin: 0; }
-.blog-card-grid .blog-card-status { display: block; margin-top: 14px; }
+.blog-card-grid .blog-index-body { position: relative; padding: 12px 0 0; min-width: 0; background: var(--bg); }
+.blog-card-grid .blog-index-body h2 { margin: 0 0 12px; font-size: 21px; line-height: 1.45; font-weight: 620; }
+.blog-card-grid .blog-card-meta { margin-bottom: 9px; font-size: 11px; line-height: 1.5; font-weight: 500; color: var(--muted); letter-spacing: 0; }
+.blog-list-meta { display: flex; flex-wrap: wrap; align-items: baseline; gap: 5px 12px; }
+.blog-list-meta .blog-pin { color: var(--accent-strong); font-weight: 650; }
+.blog-list-meta time { font-variant-numeric: tabular-nums; }
+.blog-article-details { display: flex; flex-wrap: wrap; gap: 8px 20px; margin-top: 16px; color: var(--muted); font-size: 12px; line-height: 1.6; font-variant-numeric: tabular-nums; }
+.blog-card-grid .blog-index-body p { font-size: 14px; line-height: 1.75; margin: 0; }
 @media (max-width: 760px) {
-  .blog-card-grid { grid-template-columns: minmax(0, 1fr); gap: 28px; }
+  .blog-card-grid { grid-template-columns: minmax(0, 1fr); gap: 36px; }
 }
 @media (max-width: 560px) {
   .blog-card-grid .blog-index-card { padding: 0; }
-  .blog-card-grid .blog-index-image { width: 112px; height: 84px; }
-  .blog-index-excerpt { grid-template-columns: 112px minmax(0, 1fr); gap: 14px; }
+  .blog-card-grid .blog-index-body { padding-top: 16px; }
+  .blog-card-grid .blog-index-body h2 { font-size: 20px; }
   .teaching-page .teaching-section + .teaching-section { margin-top: 52px; }
   .container:has(.conference-list) .year-block + .year-block,
   .teaching-page .year-block + .year-block { margin-top: 32px; }

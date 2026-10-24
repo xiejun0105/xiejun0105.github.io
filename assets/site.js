@@ -6,6 +6,31 @@
   root.setAttribute("data-theme", saved || (prefersDark ? "dark" : "light"));
 
   window.addEventListener("DOMContentLoaded", function () {
+    document.querySelectorAll("a[href]").forEach((link) => {
+      const url = new URL(link.href, window.location.href);
+      if ((url.protocol === "https:" || url.protocol === "http:") && url.origin !== window.location.origin) {
+        link.target = "_blank";
+        link.relList.add("noopener", "noreferrer");
+      }
+    });
+    document.querySelectorAll(".scroll-home-nav").forEach((header) => {
+      // Track the original position, not the moving edge of the sticky header.
+      const marker = document.createElement("span");
+      marker.setAttribute("aria-hidden", "true");
+      marker.style.cssText = "display:block;height:0;pointer-events:none;";
+      header.before(marker);
+      function syncHeader() {
+        header.classList.toggle("is-scrolled", marker.getBoundingClientRect().top < -1);
+      }
+      syncHeader();
+      if ("IntersectionObserver" in window) {
+        const observer = new IntersectionObserver(syncHeader, { rootMargin: "1px 0px 0px" });
+        observer.observe(marker);
+      } else {
+        window.addEventListener("scroll", syncHeader, { passive: true });
+      }
+      window.addEventListener("pageshow", syncHeader);
+    });
     document.querySelectorAll(".news-thumb img").forEach((img) => {
       function showFallback() { img.style.display = "none"; }
       img.addEventListener("error", showFallback);
@@ -41,6 +66,52 @@
         .replace(/</g, "&lt;")
         .replace(/>/g, "&gt;")
         .replace(/"/g, "&quot;");
+    }
+
+    const blogLocale = document.documentElement.lang || "en";
+    const blogLabels = blogLocale.startsWith("ja")
+      ? { pinned: "固定", published: "公開", updated: "更新" }
+      : blogLocale.startsWith("zh")
+      ? { pinned: "置顶", published: "发布", updated: "更新" }
+      : { pinned: "Pinned", published: "Published", updated: "Updated" };
+
+    function blogDate(value) {
+      if (!/^\d{4}-\d{2}-\d{2}$/.test(value || "")) return null;
+      const date = new Date(`${value}T00:00:00Z`);
+      return Number.isFinite(date.getTime()) && date.toISOString().slice(0, 10) === value ? date : null;
+    }
+
+    function dateMarkup(value, label) {
+      const date = blogDate(value);
+      if (!date) return "";
+      const text = new Intl.DateTimeFormat(blogLocale, {
+        year: "numeric", month: "short", day: "numeric", timeZone: "UTC"
+      }).format(date);
+      return `<time datetime="${escapeHtml(value)}" aria-label="${escapeHtml(label)} ${escapeHtml(text)}">${escapeHtml(text)}</time>`;
+    }
+
+    const sortedBlogPosts = [...posts].sort((a, b) => {
+      if (!!a.pinned !== !!b.pinned) return a.pinned ? -1 : 1;
+      if (a.pinned && b.pinned) {
+        const rankA = Number.isFinite(a.pinOrder) ? a.pinOrder : Number.MAX_SAFE_INTEGER;
+        const rankB = Number.isFinite(b.pinOrder) ? b.pinOrder : Number.MAX_SAFE_INTEGER;
+        if (rankA !== rankB) return rankA - rankB;
+      }
+      return (blogDate(b.publishedAt)?.getTime() || 0) - (blogDate(a.publishedAt)?.getTime() || 0);
+    });
+
+    const articleHeader = document.querySelector(".blog-post .blog-post-hero");
+    if (articleHeader) {
+      const path = window.location.pathname.replace(/index\.html$/, "").replace(/\/$/, "");
+      const post = posts.find(item => item.href.replace(/\/$/, "") === path);
+      if (post && blogDate(post.publishedAt)) {
+        const meta = document.createElement("div");
+        meta.className = "blog-article-details";
+        meta.innerHTML = `<span>${blogLabels.published} ${dateMarkup(post.publishedAt, blogLabels.published)}</span>`
+          + (blogDate(post.updatedAt) && post.updatedAt !== post.publishedAt
+            ? `<span>${blogLabels.updated} ${dateMarkup(post.updatedAt, blogLabels.updated)}</span>` : "");
+        articleHeader.querySelector(".page-description")?.after(meta);
+      }
     }
 
     document.querySelectorAll("[data-featured-blog-carousel]").forEach((carousel) => {
@@ -138,8 +209,8 @@
       const filters = Array.from(scope.querySelectorAll("[data-blog-filter]"));
 
       function filteredPosts(filter) {
-        if (!filter || filter === "All") return posts;
-        return posts.filter((post) => Array.isArray(post.tags) && post.tags.includes(filter));
+        if (!filter || filter === "All") return sortedBlogPosts;
+        return sortedBlogPosts.filter((post) => Array.isArray(post.tags) && post.tags.includes(filter));
       }
 
       function render(filter) {
@@ -151,20 +222,22 @@
 
         list.innerHTML = visiblePosts.map((post) => `
           <a class="blog-index-card" href="${escapeHtml(post.href)}">
+            <span class="blog-index-image"><img src="${escapeHtml(post.image)}" alt="" loading="lazy" decoding="async"></span>
             <div class="blog-index-body">
-              <h2>${escapeHtml(post.title)}</h2>
-              <div class="blog-card-meta">${escapeHtml(post.tag)}</div>
-              <div class="blog-index-excerpt">
-                <span class="blog-index-image"><img src="${escapeHtml(post.image)}" alt="" loading="lazy" decoding="async"></span>
-                <p>${escapeHtml(post.excerpt)}</p>
+              <div class="blog-card-meta blog-list-meta">
+                ${post.pinned ? `<span class="blog-pin">${blogLabels.pinned}</span>` : ""}
+                <span>${escapeHtml(post.tag)}</span>
+                ${dateMarkup(post.publishedAt, blogLabels.published)}
               </div>
-              <span class="blog-card-status">${escapeHtml(post.status)}</span>
+              <h2>${escapeHtml(post.title)}</h2>
+              <p>${escapeHtml(post.excerpt)}</p>
             </div>
           </a>
         `).join("");
       }
 
-      const queryTag = new URLSearchParams(window.location.search).get("tag");
+      const requestedTag = new URLSearchParams(window.location.search).get("tag");
+      const queryTag = requestedTag === "Climate" ? "Climate Change" : requestedTag;
       const initialFilter = filters.some((filter) => filter.dataset.blogFilter === queryTag) ? queryTag : "All";
 
       filters.forEach((filter) => {
