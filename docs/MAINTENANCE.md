@@ -3,9 +3,37 @@
 本规则适用于之后的论文、News、Blog、课程、项目、会议与样式更新。
 核心原则：**一处维护、按用途存放、先归档后清理、检查通过再交付**。
 
+## 文档职责与入口
+
+- 根目录 `README.md`：GitHub 项目首页，只保留简洁的公开欢迎信息，不放维护说明。
+- 本文件：面向维护者的操作手册，集中记录内容来源、存储、归档和校验规则。
+- [AGENTS.md](../AGENTS.md)：编码助手的工作约定，要求修改前阅读本手册。
+- [Blog 管理](../blog/README.md)：文章日期、置顶、标签与存档细节。
+- [论文缩略图](../images/papers/README.md)：DOI 映射、命名与选图细节。
+
+这是三语静态网站，HTML 直接服务于 GitHub Pages。构建、归档与部署是独立步骤。
+本手册和 AGENTS 如提交到公开仓库，也可被外部读取，并非私密文件；
+真正的内部笔记、原始资料与历史记录只能留在被忽略的本地目录中。
+
+构建与检查需要 Python 3 和 Node.js；Blog 归档另需 BeautifulSoup，PDF 提图需 PyMuPDF。
+检查工具只读运行，不自动下载或删除资源；JSON 报告存于被忽略的 `tmp/`。
+
 ## 1. 内容来源
 
-以根目录 README 的“修改哪个文件”为入口。不要同时维护多份相同数据。
+以本节的源文件表为入口。不要同时维护多份相同数据。
+
+| 内容 | 维护源文件 |
+| --- | --- |
+| 期刊论文 | `data/journal-publications.json` |
+| 论文缩略图 | `data/paper-thumbnails.json` |
+| 项目 | `data/funding.json` |
+| News | `data/news.json` |
+| 课程与指导 | `data/teaching-course-{en,ja,zh}.html`、`data/teaching-supervision-{en,ja,zh}.html` |
+| 其他成果 | `data/misc-{en,ja,zh}.html` |
+| Blog 标题、日期、排序、标签 | `assets/blog-data.js` |
+| Blog 正文、素材映射 | `blog/<slug>/index.html`、`data/blog-assets.json` |
+| 会议记录 | `conference/index.html` 及三语对应页，目前直接维护 HTML |
+| 全站样式与交互 | `assets/style.css`、`assets/site.js` |
 
 - `tools/build_site.py` 生成三语共享导航、页脚、论文列表、首页相关区块、项目与课程页面。
 - 课程/指导/其他成果的 `data/*.html` 是人工维护的片段，不是可以删除的构建残留。

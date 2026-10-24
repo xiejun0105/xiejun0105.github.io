@@ -1,7 +1,7 @@
 # Website Maintenance Instructions
 
 Read `docs/MAINTENANCE.md` before changing site content or asset paths.
-Use the source-of-truth table in `README.md`; do not edit generated lists instead
+Use the source-of-truth table in `docs/MAINTENANCE.md`; do not edit generated lists instead
 of their data or HTML fragments. Preserve unrelated worktree changes.
 
 ## Required Workflow
@@ -33,6 +33,11 @@ of their data or HTML fragments. Preserve unrelated worktree changes.
   passed. Report source integration and GitHub deployment separately.
 
 ## Scope
+
+Keep the root README as a minimal public welcome, not a maintenance manual.
+Put human-facing maintenance documentation in `docs/MAINTENANCE.md` and
+assistant-facing instructions here. Both are public if committed to this public
+repository; private notes belong in ignored local directories.
 
 Keep existing article URLs and shared assets stable. Do not redesign or rewrite
 unrelated content as part of resource maintenance. Do not rewrite Git history.
