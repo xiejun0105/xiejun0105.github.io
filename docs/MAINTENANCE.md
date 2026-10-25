@@ -179,3 +179,11 @@ python3 tools/archive-site-assets.py images/unused-example.png \
 - 只有正式网站部署完成后才会开始记录新访问，不能补回未统计的历史数据。
 
 官方参考：[接入](https://www.goatcounter.com/help/start)、[JavaScript 设置](https://www.goatcounter.com/help/js)、[排除自己的访问](https://www.goatcounter.com/help/skip-dev)。
+
+## 10. 默认主题
+
+- 全站在打开页面时使用访问者设备当地时间：07:00 至 17:59 默认浅色，其余时间默认深色。
+- 手动切换优先，并通过 `localStorage` 的 `theme` 字段保留，下次打开和跨页访问仍使用该选择。
+- 不再使用操作系统深浅色偏好作为默认；存储被禁用时仍允许当前页面手动切换。
+- 若需重新按时间选择，清除该站点存储中的 `theme`；不新增页面按钮或自动覆盖用户的手动选择。
+- 实现在 `assets/site.js`，边界及手动切换测试见 `tools/test_theme.py`。

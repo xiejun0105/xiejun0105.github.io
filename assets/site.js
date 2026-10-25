@@ -1,9 +1,15 @@
 
 (function () {
   const root = document.documentElement;
-  const saved = localStorage.getItem("theme");
-  const prefersDark = window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches;
-  root.setAttribute("data-theme", saved || (prefersDark ? "dark" : "light"));
+  let saved;
+  try {
+    saved = localStorage.getItem("theme");
+  } catch (_) {
+    // Theme switching still works when browser storage is unavailable.
+  }
+  const hour = new Date().getHours();
+  const defaultTheme = hour >= 7 && hour < 18 ? "light" : "dark";
+  root.setAttribute("data-theme", saved === "light" || saved === "dark" ? saved : defaultTheme);
 
   window.addEventListener("DOMContentLoaded", function () {
     document.querySelectorAll("a[href]").forEach((link) => {
@@ -50,7 +56,11 @@
           const current = root.getAttribute("data-theme") || "light";
           const next = current === "dark" ? "light" : "dark";
           root.setAttribute("data-theme", next);
-          localStorage.setItem("theme", next);
+          try {
+            localStorage.setItem("theme", next);
+          } catch (_) {
+            // Keep the manual choice for this page even if it cannot be saved.
+          }
           syncLabel();
         });
       });
