@@ -16,6 +16,7 @@ import subprocess
 from urllib.parse import unquote, urlsplit
 
 from site_analytics import PageType
+from publication_topics import selected_landing_topics, validate_topics
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -31,6 +32,9 @@ class PageReferences(HTMLParser):
         self.references = []
         self.images = []
         self.filters = set()
+        self.publication_filters = []
+        self.publication_papers = {}
+        self.identity_topics = []
 
     def handle_starttag(self, tag, attrs):
         attrs = dict(attrs)
@@ -41,6 +45,12 @@ class PageReferences(HTMLParser):
             self.images.append(attrs['src'])
         if 'data-blog-filter' in attrs:
             self.filters.add(attrs['data-blog-filter'])
+        if 'data-publication-topic' in attrs:
+            self.publication_filters.append(attrs['data-publication-topic'])
+        if 'data-publication-paper' in attrs:
+            self.publication_papers[attrs.get('data-doi')] = attrs.get('data-topics', '').split()
+        if 'data-identity-topic' in attrs:
+            self.identity_topics.append((attrs['data-identity-topic'], attrs.get('href')))
         if attrs.get('srcset') and not attrs['srcset'].startswith('data:'):
             self.references.extend(item.strip().split()[0] for item in attrs['srcset'].split(',') if item.strip())
 
@@ -120,6 +130,29 @@ def audit(root):
             for value in string_values(values):
                 if value.startswith('/'):
                     reference(source, value)
+
+    if (root / 'data/research-topics.json').is_file():
+        topics = documents.get('data/research-topics.json')
+        papers = documents.get('data/journal-publications.json', [])
+        try:
+            validate_topics(papers, topics)
+        except (ValueError, KeyError, TypeError) as exc:
+            errors.append(f'Publication topic data: {exc}')
+        else:
+            expected_topics = {'all'} | {topic['id'] for topic in topics}
+            expected_papers = {paper['doi']: paper['topics'] for paper in papers}
+            for locale in ('', 'ja/', 'zh/'):
+                page_path = locale + 'publications/journal/index.html'
+                page = pages.get(page_path)
+                if not page or set(page.publication_filters) != expected_topics or len(page.publication_filters) != len(expected_topics):
+                    errors.append(f'{page_path}: rebuild publication topic buttons')
+                if not page or page.publication_papers != expected_papers:
+                    errors.append(f'{page_path}: rebuild DOI/topic assignments')
+                landing_path = locale + 'index.html'
+                landing = pages.get(landing_path)
+                expected_links = [(topic['id'], f'/{locale}publications/journal/?topic={topic["id"]}') for topic in selected_landing_topics(topics)]
+                if not landing or landing.identity_topics != expected_links:
+                    errors.append(f'{landing_path}: rebuild profile topic links')
 
     script = (
         "const fs=require('fs'),vm=require('vm');const c={window:{}};"

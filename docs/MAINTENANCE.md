@@ -26,6 +26,7 @@
 | --- | --- |
 | 名片信息与头像 | `index.html`、`ja/index.html`、`zh/index.html` |
 | 期刊论文 | `data/journal-publications.json` |
+| 论文研究主题 | `data/research-topics.json` 定义主题；每篇论文的 `topics` 指定归属 |
 | 论文缩略图 | `data/paper-thumbnails.json` |
 | 项目 | `data/funding.json` |
 | News | `data/news.json` |
@@ -108,6 +109,7 @@ python3 -m unittest discover -s tools -p 'test_*.py'
 node --check assets/site.js
 node --check assets/blog-data.js
 node --check assets/analytics.js
+node --check assets/publication-filter.js
 git diff --check
 ```
 
@@ -188,3 +190,27 @@ python3 tools/archive-site-assets.py images/unused-example.png \
 - 不再使用操作系统深浅色偏好作为默认；存储被禁用时仍允许当前页面手动切换。
 - 若需重新按时间选择，清除该站点存储中的 `theme`；不新增页面按钮或自动覆盖用户的手动选择。
 - 实现在 `assets/site.js`，边界及手动切换测试见 `tools/test_theme.py`。
+
+## 11. 论文主题筛选
+
+- 主题字典位于 `data/research-topics.json`：`id` 是稳定英文 slug，`labels` 包含中英日名称。
+- `primary: true` 仅表示在 Publications 默认展开；其他主题放在“更多主题”中，不代表首页精选。
+- 标签收起时单行横向滚动，展开后全部标签在同一个 flex 区域自然换行；不得将附加主题另排为独立列表。展开按钮位于右侧，结果说明在下方。
+- 每篇论文在 `data/journal-publications.json` 添加 `topics: ["climate-change", "disclosure"]`，DOI 仍是论文的唯一标识。
+- 一篇论文可归属多个主题；界面按单选筛选。同一论文不会复制到多个列表，原有排序、年份、编号与缩略图不改变。
+- 主题按 PDF 的摘要、研究对象及实际分析内容人工归类，不因引言提到某个词就贴标签。
+- Human Capital 指教育、健康、能力等资本存量；Well-being 指情绪、职业压力与生活体验，不将所有员工研究自动归入前者。
+- Climate Change 用于明确研究气候风险、政策、减缓或气候披露的论文；一般环境绩效论文不自动归入。
+- 研究计划中的交通/城市新方向不作为已有论文标签；仅在正式内容确实对应时新增主题。
+- 新增主题须有三语名称并至少关联一篇论文，不能用空标签或替换现有 ID 破坏已分享链接。
+- 构建会统一生成三语筛选按钮、数量及论文归属属性，不手工改生成页面。
+- 深链接为 `/publications/journal/?topic=climate-change`；语言切换保留主题，All 清除主题，前进/后退恢复筛选。
+- 筛选只隐藏不匹配论文、空年份及相应年度链接；无 JavaScript 时保持全部论文可读。
+- 论文筛选交互仅加载在三语 Journal 页面；首页名片显示五个精选主题的普通链接。
+- `landing: true` 控制名片是否展示主题，`landingRow` 指定行；不要与 `primary` 混用。第一行为 Corporate Sustainability、Climate Change、Well-being，第二行为 Supply Chains、Human Capital。
+- 名片默认复用三语 `labels`，较短的展示名称可通过 `landingLabels` 按语言覆盖，不改变主题 ID 或论文页名称。
+- 名片标签由构建脚本生成在介绍段落下方，统一为两行；字号略小于正文（桌面 14px，窄屏 13px），窄屏不足时可横向滑动。语言切换与名片主体的组间距为 8px，保留介绍组合底部留白。
+- 名片主题使用无边框、无底纹的文字链接，淡色 # 仅为视觉提示，悬停/聚焦变色并提供“查看相关论文”的三语提示。
+- 介绍段落不保留尾部空白高度；如需三语名片高度稳定，将保留空间放在介绍与标签组合的底部，避免标签远离实际段落。
+- 每次修改后运行构建、全站检查与单元测试；`check_site.py` 会核对三语按钮及 DOI/topic 归属。
+- 交互位于 `assets/publication-filter.js`，渲染/校验位于 `tools/publication_topics.py`，测试见 `tools/test_publication_topics.py`。

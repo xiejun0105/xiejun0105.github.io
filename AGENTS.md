@@ -27,6 +27,10 @@ of their data or HTML fragments. Preserve unrelated worktree changes.
   focused unit tests, both JavaScript syntax checks and `git diff --check`.
   Also syntax-check `assets/analytics.js`. Use only the shared analytics loader;
   preserve production-host and privacy guards, and never send fake test pageviews.
+  For publication filters, maintain `data/research-topics.json` and each paper's
+  `topics` in `data/journal-publications.json`; rebuild all three journal pages
+  and syntax-check `assets/publication-filter.js`. Do not infer topics from
+  keyword mentions or connect homepage topic tags without a separate request.
 - Review affected desktop/mobile and light/dark views when browser access is
   available. State clearly when visual verification could not be performed.
 - Archive the final article after integration; keep editorial notes locally and

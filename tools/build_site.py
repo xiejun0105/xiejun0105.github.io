@@ -9,10 +9,13 @@ import json
 import re
 
 from site_analytics import with_analytics
+from publication_topics import render_filters, validate_topics, with_landing_topics
 
 ROOT = Path(__file__).resolve().parents[1]
 LOCAL_ONLY_DIRS = {'.git', '・My publications', '・Blog draft', '・Site archive', 'tmp'}
 JOURNAL = json.loads((ROOT / "data/journal-publications.json").read_text())
+RESEARCH_TOPICS = json.loads((ROOT / "data/research-topics.json").read_text())
+validate_topics(JOURNAL, RESEARCH_TOPICS)
 THUMBNAILS = json.loads((ROOT / "data/paper-thumbnails.json").read_text())
 PAPERS = JOURNAL[:5]
 FUNDING = json.loads((ROOT / "data/funding.json").read_text())
@@ -118,7 +121,7 @@ def home_sections(locale):
 
 def journal_timeline():
     years = sorted({record["year"] for record in JOURNAL}, reverse=True)
-    links = '\n'.join(f'<a href="#year-{year}">{year}</a>' for year in years)
+    links = '\n'.join(f'<a href="#year-{year}" data-publication-year-link>{year}</a>' for year in years)
     blocks = []
     for year in years:
         entries = []
@@ -127,7 +130,7 @@ def journal_timeline():
             doi = escape(paper["doi"], quote=True)
             note = f'<div class="pub-doi">{escape(paper["note"])}</div>' if paper.get("note") else ''
             entries.append(
-                f'<li class="pub-item publication-with-image">'
+                f'<li class="pub-item publication-with-image" data-publication-paper data-doi="{doi}" data-topics="{escape(" ".join(paper["topics"]), quote=True)}">'
                 f'<a class="publication-image-link" href="https://doi.org/{doi}" aria-label="Open article: {escape(paper["title"], quote=True)}">{paper_image(paper, "publication-image")}</a>'
                 f'<div class="publication-copy"><div><span class="pub-meta">{authors}</span> '
                 f'<span class="pub-title">{escape(paper["title"])}</span>. <em>{escape(paper["journal"])}</em>.</div>'
@@ -313,6 +316,10 @@ for path in ROOT.rglob("*.html"):
     if relative in (Path("publications/journal/index.html"), Path("ja/publications/journal/index.html"), Path("zh/publications/journal/index.html")):
         source, count = re.subn(r'<nav class="timeline-nav"[^>]*>.*?</nav><div class="timeline-content">.*?</div>(?=</div></main>)', journal_timeline(), source, count=1, flags=re.S)
         assert count == 1, path
+        source = re.sub(r'<!-- publication-topics:start -->.*?<!-- publication-topics:end -->\s*', '', source, flags=re.S)
+        source = source.replace('<div class="timeline-layout">', render_filters(JOURNAL, RESEARCH_TOPICS, locale) + '<div class="timeline-layout">', 1)
+        if '/assets/publication-filter.js' not in source:
+            source = source.replace('</head>', '<script defer src="/assets/publication-filter.js"></script>\n</head>', 1)
     if relative in (Path("home/index.html"), Path("ja/home/index.html"), Path("zh/home/index.html")):
         featured = home_sections(locale)
         if '<!-- featured-publications:start -->' in source:
@@ -445,6 +452,7 @@ for locale in ("en", "ja", "zh"):
     landing_path = ROOT / prefix.lstrip("/") / "index.html"
     home_path = ROOT / prefix.lstrip("/") / "home/index.html"
     landing = landing_path.read_text()
+    landing = with_landing_topics(landing, RESEARCH_TOPICS, locale)
     landing = re.sub(r'\s*<nav class="landing-page-nav"[^>]*>.*?</nav>', '', landing, count=1, flags=re.S)
     landing = landing.replace('            <button class="theme-toggle" type="button" data-theme-toggle><span class="moon">☾</span><span class="sun">☼</span></button>\n', '', 1)
     home = home_path.read_text()

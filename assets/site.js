@@ -283,7 +283,7 @@
       const byId = new Map(timelineLinks.map(a => [a.getAttribute("href").replace("#",""), a]));
       const observer = new IntersectionObserver(entries => {
         entries.forEach(entry => {
-          if (entry.isIntersecting) {
+          if (entry.isIntersecting && !entry.target.hidden) {
             timelineLinks.forEach(a => a.classList.remove("active"));
             const active = byId.get(entry.target.id);
             if (active) active.classList.add("active");

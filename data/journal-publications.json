@@ -4,21 +4,38 @@
     "authors": "Keeley, A. R., Xie, J., Fujii, H., & Managi, S.",
     "title": "The Hidden Arithmetic of Climate Disclosure: How a Decade of CDP Climate Scores Masks a Large Within‐Firm Rise and an Equally Large Composition Drag",
     "journal": "Corporate Social Responsibility and Environmental Management",
-    "doi": "10.1002/csr.71080"
+    "doi": "10.1002/csr.71080",
+    "topics": [
+      "corporate-sustainability",
+      "climate-change",
+      "disclosure",
+      "sustainability-assessment"
+    ]
   },
   {
     "year": 2026,
     "authors": "Shen, S., Li, C., Xie, J., Fujii, H., Keeley, A., & Managi, S.",
     "title": "Do Firms Disclose Financially Material ESG Risks? Evidence From Japanese Food and Beverage Firms Using a Text Match Pretrained Transformer",
     "journal": "Corporate Social Responsibility and Environmental Management",
-    "doi": "10.1002/csr.70990"
+    "doi": "10.1002/csr.70990",
+    "topics": [
+      "corporate-sustainability",
+      "disclosure",
+      "financial-materiality",
+      "supply-chains"
+    ]
   },
   {
     "year": 2026,
     "authors": "Shen, S., Wang, X., Xie, J., Fujii, H., Keeley, A., & Managi, S.",
     "title": "Assessing financial materiality for environmental issues: impacts on cost of capital in diverse national contexts",
     "journal": "Humanities and Social Sciences Communications",
-    "doi": "10.1057/s41599-026-08932-z"
+    "doi": "10.1057/s41599-026-08932-z",
+    "topics": [
+      "corporate-sustainability",
+      "financial-materiality",
+      "capital-markets"
+    ]
   },
   {
     "year": 2026,
@@ -26,167 +43,283 @@
     "title": "Supply Chain Sustainability and Human Capital: A Multilevel Analysis",
     "journal": "Business Strategy and the Environment",
     "doi": "10.1002/bse.71294",
-    "note": "* Co-first authors"
+    "note": "* Co-first authors",
+    "topics": [
+      "corporate-sustainability",
+      "supply-chains",
+      "human-capital",
+      "inclusive-wealth"
+    ]
   },
   {
     "year": 2026,
     "authors": "Xie, J., Ünal, E., Keeley, A. R., & Managi, S.",
     "title": "The Interplay of ESG Performance and Global Supply Chains: An Input–Output Study of China, Japan, and the United States",
     "journal": "Corporate Social Responsibility and Environmental Management",
-    "doi": "10.1002/csr.70823"
+    "doi": "10.1002/csr.70823",
+    "topics": [
+      "corporate-sustainability",
+      "supply-chains"
+    ]
   },
   {
     "year": 2026,
     "authors": "Keeley, A. R., Xie, J., Li, C., Nagamura, M., & Managi, S.",
     "title": "Does Disclosure Type Matter? Climate-Related Financial Disclosures and Corporate Performance",
     "journal": "Business Strategy and the Environment",
-    "doi": "10.1002/bse.71121"
+    "doi": "10.1002/bse.71121",
+    "topics": [
+      "corporate-sustainability",
+      "climate-change",
+      "disclosure",
+      "capital-markets",
+      "financial-materiality"
+    ]
   },
   {
     "year": 2026,
     "authors": "Wang, X., Xie, J., Fujii, H., Keeley, A. R., & Managi, S.",
     "title": "Environmental, Social, and Governance (ESG) Performance and Equity Misvaluation: The Moderating Role of Country-Level Factors",
     "journal": "Corporate Social Responsibility and Environmental Management",
-    "doi": "10.1002/csr.70441"
+    "doi": "10.1002/csr.70441",
+    "topics": [
+      "corporate-sustainability",
+      "capital-markets"
+    ]
   },
   {
     "year": 2026,
     "authors": "Wang, X., Shen, S., Xie, J., Fujii, H., Keeley, A. R., & Managi, S.",
     "title": "Environmental, Social, and Governance Factors as Tools for Improving Market Efficiency: A Study on Equity Misvaluation",
     "journal": "Business Strategy and the Environment",
-    "doi": "10.1002/bse.70486"
+    "doi": "10.1002/bse.70486",
+    "topics": [
+      "corporate-sustainability",
+      "disclosure",
+      "capital-markets"
+    ]
   },
   {
     "year": 2025,
     "authors": "Takeda, M., Xie, J., Kurita, K., & Managi, S.",
     "title": "Advancing Hospital Sustainability: A Multidimensional Index Integrating ESG and Digital Transformation",
     "journal": "Sustainability, 17(19), 8787",
-    "doi": "10.3390/su17198787"
+    "doi": "10.3390/su17198787",
+    "topics": [
+      "corporate-sustainability",
+      "sustainability-assessment",
+      "healthcare"
+    ]
   },
   {
     "year": 2025,
     "authors": "Xie, J., Piao, X., & Managi, S.",
     "title": "A Data-Driven Typology of Individually Perceived Workplace Environments and Employee Well-Being",
     "journal": "Scientific Reports, 15(1), 33238",
-    "doi": "10.1038/s41598-025-18332-z"
+    "doi": "10.1038/s41598-025-18332-z",
+    "topics": [
+      "well-being"
+    ]
   },
   {
     "year": 2025,
     "authors": "Yoshida, K., Iino, Y., Eba, F., Xie, J., & Managi, S.",
     "title": "Do Climate Change Risks and Corporate Governance Encourage Green M&A?",
     "journal": "Journal of Environmental Management, 393, 127123",
-    "doi": "10.1016/j.jenvman.2025.127123"
+    "doi": "10.1016/j.jenvman.2025.127123",
+    "topics": [
+      "corporate-sustainability",
+      "climate-change",
+      "corporate-governance",
+      "capital-markets"
+    ]
   },
   {
     "year": 2025,
     "authors": "Xie, J., Yoshida, K., Chen, S., Keeley, A. R., Fujii, H., & Managi, S.",
     "title": "Inclusive Wealth and ESG Practices: Financial Impacts in a Global Context",
     "journal": "Asian Economic Policy Review",
-    "doi": "10.1111/aepr.70006"
+    "doi": "10.1111/aepr.70006",
+    "topics": [
+      "corporate-sustainability",
+      "inclusive-wealth",
+      "human-capital",
+      "capital-markets"
+    ]
   },
   {
     "year": 2025,
     "authors": "Chen, S., Piao, X., Xie, J., & Managi, S.",
     "title": "Human Capital and Regional Disparities: Advancing Accounting Frameworks with Education, Health, and Population Dynamics",
     "journal": "PLOS ONE, 20(3), e0315166",
-    "doi": "10.1371/journal.pone.0315166"
+    "doi": "10.1371/journal.pone.0315166",
+    "topics": [
+      "human-capital",
+      "inclusive-wealth"
+    ]
   },
   {
     "year": 2025,
     "authors": "Chen, Y., Zhou, C., Zhang, D., Xie, J., & Managi, S.",
     "title": "Mitigating Climate Policy Shocks Through Mergers and Acquisitions? An Empirical Investigation of International Oil and Gas Firms",
     "journal": "Corporate Social Responsibility and Environmental Management",
-    "doi": "10.1002/csr.3108"
+    "doi": "10.1002/csr.3108",
+    "topics": [
+      "corporate-sustainability",
+      "climate-change",
+      "corporate-governance",
+      "capital-markets"
+    ]
   },
   {
     "year": 2024,
     "authors": "Piao, X., Xie, J., & Managi, S.",
     "title": "Continuous Worsening of Population Emotional Stress Globally: Universality and Variations",
     "journal": "BMC Public Health, 24(1), 3576",
-    "doi": "10.1186/s12889-024-20961-4"
+    "doi": "10.1186/s12889-024-20961-4",
+    "topics": [
+      "well-being"
+    ]
   },
   {
     "year": 2024,
     "authors": "Shen, S., Xie, J., Fujii, H., Keeley, A. R., & Managi, S.",
     "title": "Does Environmental Materiality Matter to Corporate Financial Performance: Evidence from 34 Countries",
     "journal": "Corporate Social Responsibility and Environmental Management",
-    "doi": "10.1002/csr.3062"
+    "doi": "10.1002/csr.3062",
+    "topics": [
+      "corporate-sustainability",
+      "financial-materiality",
+      "disclosure",
+      "capital-markets"
+    ]
   },
   {
     "year": 2024,
     "authors": "Xie, J., Piao, X., & Managi, S.",
     "title": "The Role of Female Managers in Enhancing Employee Well-Being: A Path Through Workplace Resources",
     "journal": "Gender in Management: An International Journal",
-    "doi": "10.1108/GM-09-2023-0307"
+    "doi": "10.1108/GM-09-2023-0307",
+    "topics": [
+      "well-being",
+      "leadership",
+      "gender-diversity"
+    ]
   },
   {
     "year": 2024,
     "authors": "Wang, Y., Shen, S., Xie, J., Fujii, H., Keeley, A. R., & Managi, S.",
     "title": "How Corporate Climate Change Mitigation Actions Affect the Cost of Capital",
     "journal": "Corporate Social Responsibility and Environmental Management",
-    "doi": "10.1002/csr.2853"
+    "doi": "10.1002/csr.2853",
+    "topics": [
+      "corporate-sustainability",
+      "climate-change",
+      "disclosure",
+      "capital-markets"
+    ]
   },
   {
     "year": 2024,
     "authors": "Ida, A., Yoshida, K., Xie, J., Tanaka, Y., & Managi, S.",
     "title": "Do Local Government Sustainability Initiatives Impact Corporate Social Sustainability Practices?",
     "journal": "Business Strategy and the Environment",
-    "doi": "10.1002/bse.3780"
+    "doi": "10.1002/bse.3780",
+    "topics": [
+      "corporate-sustainability",
+      "regional-policy"
+    ]
   },
   {
     "year": 2023,
     "authors": "Xie, J., Piao, X., & Managi, S.",
     "title": "Lessons on the COVID-19 Pandemic: Who Are the Most Affected",
     "journal": "Scientific Reports, 13(1), 9365",
-    "doi": "10.1038/s41598-023-36493-7"
+    "doi": "10.1038/s41598-023-36493-7",
+    "topics": [
+      "well-being"
+    ]
   },
   {
     "year": 2023,
     "authors": "Xie, J., Tanaka, Y., Keeley, A. R., Fujii, H., & Managi, S.",
     "title": "Do Investors Incorporate Financial Materiality? Remapping the Environmental Information in Corporate Sustainability Reporting",
     "journal": "Corporate Social Responsibility and Environmental Management",
-    "doi": "10.1002/csr.2524"
+    "doi": "10.1002/csr.2524",
+    "topics": [
+      "corporate-sustainability",
+      "financial-materiality",
+      "capital-markets",
+      "sustainability-assessment",
+      "disclosure"
+    ]
   },
   {
     "year": 2023,
     "authors": "Xie, J., Nozawa, W., & Managi, S.",
     "title": "The Nexus of Top Executives’ Attributes, Firm Strategies, and Outcomes: Large Firms Versus SMEs",
     "journal": "Humanities and Social Sciences Communications, 10(1), 136",
-    "doi": "10.1057/s41599-023-01628-8"
+    "doi": "10.1057/s41599-023-01628-8",
+    "topics": [
+      "corporate-governance",
+      "leadership"
+    ]
   },
   {
     "year": 2022,
     "authors": "Keeley, A. R., Chapman, A. J., Yoshida, K., Xie, J., Imbulana, J., Takeda, S., & Managi, S.",
     "title": "ESG Metrics and Social Equity: Investigating Commensurability",
     "journal": "Frontiers in Sustainability, 3",
-    "doi": "10.3389/frsus.2022.920955"
+    "doi": "10.3389/frsus.2022.920955",
+    "topics": [
+      "corporate-sustainability",
+      "sustainability-assessment",
+      "social-equity"
+    ]
   },
   {
     "year": 2022,
     "authors": "Piao, X., Xie, J., & Managi, S.",
     "title": "Environmental, Social, and Corporate Governance Activities with Employee Psychological Well-Being Improvement",
     "journal": "BMC Public Health, 22(1), 22",
-    "doi": "10.1186/s12889-021-12350-y"
+    "doi": "10.1186/s12889-021-12350-y",
+    "topics": [
+      "corporate-sustainability",
+      "well-being"
+    ]
   },
   {
     "year": 2022,
     "authors": "Piao, X., Xie, J., & Managi, S.",
     "title": "Occupational Stress: Evidence from Industries Affected by COVID-19 in Japan",
     "journal": "BMC Public Health, 22(1), 1005",
-    "doi": "10.1186/s12889-022-13257-y"
+    "doi": "10.1186/s12889-022-13257-y",
+    "topics": [
+      "well-being"
+    ]
   },
   {
     "year": 2020,
     "authors": "Xie, J., Nozawa, W., & Managi, S.",
     "title": "The Role of Women on Boards in Corporate Environmental Strategy and Financial Performance: A Global Outlook",
     "journal": "Corporate Social Responsibility and Environmental Management, 27(5), 2044–2059",
-    "doi": "10.1002/csr.1945"
+    "doi": "10.1002/csr.1945",
+    "topics": [
+      "corporate-sustainability",
+      "corporate-governance",
+      "gender-diversity"
+    ]
   },
   {
     "year": 2019,
     "authors": "Xie, J., Nozawa, W., Yagi, M., Fujii, H., & Managi, S.",
     "title": "Do Environmental, Social, and Governance Activities Improve Corporate Financial Performance?",
     "journal": "Business Strategy and the Environment, 28(2), 286–300",
-    "doi": "10.1002/bse.2224"
+    "doi": "10.1002/bse.2224",
+    "topics": [
+      "corporate-sustainability",
+      "disclosure",
+      "sustainability-assessment"
+    ]
   }
 ]

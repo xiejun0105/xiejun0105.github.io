@@ -1,0 +1,18 @@
+[
+  {"id": "corporate-sustainability", "primary": true, "landing": true, "landingRow": 1, "landingLabels": {"ja": "企業の持続可能性"}, "labels": {"en": "Corporate Sustainability", "ja": "企業のサステナビリティ", "zh": "企业可持续性"}},
+  {"id": "climate-change", "primary": true, "landing": true, "landingRow": 1, "labels": {"en": "Climate Change", "ja": "気候変動", "zh": "气候变化"}},
+  {"id": "supply-chains", "primary": true, "landing": true, "landingRow": 2, "labels": {"en": "Supply Chains", "ja": "サプライチェーン", "zh": "供应链"}},
+  {"id": "human-capital", "primary": true, "landing": true, "landingRow": 2, "labels": {"en": "Human Capital", "ja": "人的資本", "zh": "人力资本"}},
+  {"id": "well-being", "primary": true, "landing": true, "landingRow": 1, "labels": {"en": "Well-being", "ja": "ウェルビーイング", "zh": "福祉"}},
+  {"id": "disclosure", "primary": true, "labels": {"en": "Disclosure", "ja": "情報開示", "zh": "信息披露"}},
+  {"id": "capital-markets", "primary": true, "labels": {"en": "Capital Markets", "ja": "資本市場", "zh": "资本市场"}},
+  {"id": "financial-materiality", "primary": false, "labels": {"en": "Financial Materiality", "ja": "財務的マテリアリティ", "zh": "财务重要性"}},
+  {"id": "corporate-governance", "primary": false, "labels": {"en": "Corporate Governance", "ja": "コーポレートガバナンス", "zh": "公司治理"}},
+  {"id": "leadership", "primary": false, "labels": {"en": "Leadership", "ja": "リーダーシップ", "zh": "领导力"}},
+  {"id": "gender-diversity", "primary": false, "labels": {"en": "Gender Diversity", "ja": "ジェンダー多様性", "zh": "性别多样性"}},
+  {"id": "regional-policy", "primary": false, "labels": {"en": "Regional Policy", "ja": "地域政策", "zh": "区域政策"}},
+  {"id": "inclusive-wealth", "primary": false, "labels": {"en": "Inclusive Wealth", "ja": "包括的富", "zh": "包容性财富"}},
+  {"id": "sustainability-assessment", "primary": false, "labels": {"en": "Sustainability Assessment", "ja": "サステナビリティ評価", "zh": "可持续性评价"}},
+  {"id": "healthcare", "primary": false, "labels": {"en": "Healthcare", "ja": "医療", "zh": "医疗"}},
+  {"id": "social-equity", "primary": false, "labels": {"en": "Social Equity", "ja": "社会的公正", "zh": "社会公平"}}
+]
