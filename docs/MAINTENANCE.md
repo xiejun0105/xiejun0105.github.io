@@ -24,6 +24,7 @@
 
 | 内容 | 维护源文件 |
 | --- | --- |
+| 名片信息与头像 | `index.html`、`ja/index.html`、`zh/index.html` |
 | 期刊论文 | `data/journal-publications.json` |
 | 论文缩略图 | `data/paper-thumbnails.json` |
 | 项目 | `data/funding.json` |
