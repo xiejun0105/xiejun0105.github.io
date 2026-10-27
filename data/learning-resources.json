@@ -1,12 +1,30 @@
 [
   {
+    "id": "elements-of-style",
+    "title": "The Elements of Style",
+    "topics": ["writing"],
+    "previewOrder": 3,
+    "url": "https://amzn.asia/d/00iinRh6",
+    "kind": "print-book",
+    "language": "en",
+    "thumbnail": "/images/teaching/resources/elements-of-style-dover-cover.jpg",
+    "imageSource": "https://store.doverpublications.com/products/9780486447988",
+    "description": {
+      "en": "William Strunk Jr.'s original guide to clear English usage, composition, and style, in the Dover edition.",
+      "ja": "William Strunk Jr. による、明快な英文の語法・構成・文体のガイド。原版を収めた Dover 版。",
+      "zh": "William Strunk Jr. 关于清晰英文写作、篇章组织和文体的简明指南，Dover 原版重印本。"
+    }
+  },
+  {
     "id": "tsutawaru-design",
+    "topics": ["design", "writing"],
+    "previewOrder": 5,
     "title": "伝わるデザイン｜研究発表のユニバーサルデザイン",
     "url": "https://tsutawarudesign.com/",
     "kind": "guide",
     "language": "ja",
-    "thumbnail": "/images/teaching/resources/tsutawaru-design-original.png",
-    "imageSource": "https://tsutawarudesign.com/og-image.png",
+    "thumbnail": "/images/teaching/resources/tsutawaru-design-book-cover.jpg",
+    "imageSource": "https://gihyo.jp/book/2021/978-4-297-11985-0",
     "description": {
       "en": "Practical guidance for clear research slides, posters, charts, and typography.",
       "ja": "研究発表のスライド、ポスター、グラフ、文字組みを見やすく整える実践ガイド。",
@@ -15,6 +33,8 @@
   },
   {
     "id": "causal-inference-remix",
+    "topics": ["causal-inference", "data-analysis"],
+    "previewOrder": 2,
     "title": "Causal Inference: The Remix",
     "url": "https://mixtape.scunning.com/",
     "kind": "book",
@@ -28,7 +48,41 @@
     }
   },
   {
+    "id": "how-to-read-a-book",
+    "title": "How to Read a Book",
+    "topics": ["reading", "research-practice"],
+    "previewOrder": 6,
+    "url": "https://amzn.asia/d/06Dn04ou",
+    "kind": "print-book",
+    "language": "en",
+    "thumbnail": "/images/teaching/resources/how-to-read-a-book-cover.jpg",
+    "imageSource": "https://www.simonandschuster.com/books/How-to-Read-a-Book/Mortimer-J-Adler/9780671212094",
+    "description": {
+      "en": "Mortimer J. Adler and Charles Van Doren's Touchstone guide to active reading, understanding arguments, and comparing books.",
+      "ja": "Mortimer J. Adler と Charles Van Doren による、能動的な読書、議論の理解、複数の本の比較を学ぶ Touchstone の書籍。",
+      "zh": "Mortimer J. Adler 与 Charles Van Doren 的 Touchstone 版读书指南，介绍主动阅读、理解论证与比较多本著作的方法。"
+    }
+  },
+  {
+    "id": "nihongo-sakubun-gijutsu",
+    "title": "日本語の作文技術",
+    "topics": ["writing"],
+    "previewOrder": 4,
+    "url": "https://amzn.asia/d/03Z08zH7",
+    "kind": "print-book",
+    "language": "ja",
+    "thumbnail": "/images/teaching/resources/nihongo-sakubun-gijutsu-cover.jpg",
+    "imageSource": "https://publications.asahi.com/product/17593.html",
+    "description": {
+      "en": "Katsuichi Honda's guide to readable Japanese prose, with attention to word order, punctuation, and sentence structure.",
+      "ja": "本多勝一による、語順・句読点・文の構造から読みやすい日本語を考える文章術。",
+      "zh": "本多胜一从语序、标点与句子结构出发，讲解如何写出清晰易读的日语文章。"
+    }
+  },
+  {
     "id": "fundamentals-data-visualization",
+    "previewOrder": 8,
+    "topics": ["data-analysis", "design"],
     "title": "Fundamentals of Data Visualization",
     "url": "https://clauswilke.com/dataviz/",
     "kind": "book",
@@ -43,6 +97,8 @@
   },
   {
     "id": "r-for-data-science",
+    "previewOrder": 1,
+    "topics": ["programming", "data-analysis"],
     "title": "R for Data Science (2e)",
     "url": "https://r4ds.hadley.nz/",
     "kind": "book",
@@ -56,31 +112,19 @@
     }
   },
   {
-    "id": "the-turing-way",
-    "title": "The Turing Way",
-    "url": "https://book.the-turing-way.org/",
+    "id": "big-book-of-r",
+    "topics": ["programming", "data-analysis"],
+    "previewOrder": 7,
+    "title": "Big Book of R",
+    "url": "https://www.bigbookofr.com/",
     "kind": "guide",
     "language": "en",
-    "thumbnail": "/images/teaching/resources/the-turing-way-pathway.svg",
-    "imageSource": "https://book.the-turing-way.org/",
+    "thumbnail": "/images/teaching/resources/big-book-of-r-cover.png",
+    "imageSource": "https://www.bigbookofr.com/cover1.png",
     "description": {
-      "en": "A community handbook for reproducible, ethical, and collaborative research.",
-      "ja": "再現可能で倫理的、協働的な研究のためのコミュニティ・ハンドブック。",
-      "zh": "关于可重复、合乎伦理且协作式研究的社区手册。"
-    }
-  },
-  {
-    "id": "ten-rules-reproducible-research",
-    "title": "Ten Simple Rules for Reproducible Computational Research",
-    "url": "https://doi.org/10.1371/journal.pcbi.1003285",
-    "kind": "paper",
-    "language": "en",
-    "thumbnail": "/images/teaching/resources/ten-rules-reproducible-research-page1.png",
-    "imageSource": "https://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1003285",
-    "description": {
-      "en": "A concise open-access paper on documenting, sharing, and rerunning computational analyses.",
-      "ja": "計算研究の記録・共有・再実行に関する簡潔なオープンアクセス論文。",
-      "zh": "关于记录、共享与重现计算研究分析流程的开放获取论文。"
+      "en": "Oscar Baruffa's searchable collection of R books, covering programming, statistics, visualization, and applied data analysis.",
+      "ja": "Oscar Baruffa による R 書籍のコレクション。プログラミング、統計、可視化、応用データ分析を分野別に探せます。",
+      "zh": "Oscar Baruffa 整理的 R 书籍资源库，可按编程、统计、可视化与应用数据分析等主题查找教材。"
     }
   }
 ]

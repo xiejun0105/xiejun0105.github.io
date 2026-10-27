@@ -21,6 +21,7 @@ PAPERS = JOURNAL[:5]
 FUNDING = json.loads((ROOT / "data/funding.json").read_text())
 NEWS = json.loads((ROOT / "data/news.json").read_text())
 LEARNING_RESOURCES = json.loads((ROOT / "data/learning-resources.json").read_text())
+RESOURCE_TOPICS = json.loads((ROOT / "data/learning-resource-topics.json").read_text())
 NEWS_HEADING = {"en": "Media & News", "ja": "メディア・ニュース", "zh": "媒体报道"}
 LANGUAGES = {
     "en": {"prefix": "", "home": "Home", "papers": "Publications", "projects": "Projects", "teaching": "Teaching", "conference": "Conference", "blog": "Blog", "featured": "Recent publications", "intro": "The latest peer-reviewed work on sustainability, disclosure, and financial materiality.", "all": "All journal articles", "policy": "Policy", "reports": "Policy & international reports", "funding": "Funding & Project", "misc": "Other research outputs", "more": "See more"},
@@ -423,7 +424,8 @@ RESOURCE_TEXT = {
 
 def resource_meta(item, locale):
     labels = RESOURCE_TEXT[locale]
-    return f'{escape(labels[item["kind"]])} · {escape(labels[item["language"]])}'
+    kind = {"en": "Book", "ja": "書籍", "zh": "书籍"}[locale] if item["kind"] == "print-book" else labels[item["kind"]]
+    return f'{escape(kind)} · {escape(labels[item["language"]])}'
 
 
 def resource_tile(item, locale):
@@ -440,29 +442,45 @@ def resource_tile(item, locale):
 def resource_preview(locale):
     labels = RESOURCE_TEXT[locale]
     prefix = LANGUAGES[locale]["prefix"]
-    tiles = ''.join(resource_tile(item, locale) for item in LEARNING_RESOURCES[:5])
+    ordered = sorted(LEARNING_RESOURCES, key=lambda item: item.get("previewOrder", 1000))
+    tiles = ''.join(resource_tile(item, locale) for item in ordered)
+    previous, following = {"en": ("Previous resources", "Next resources"), "ja": ("前のリソース", "次のリソース"), "zh": ("上一组资源", "下一组资源")}[locale]
     return (
         '<section class="section teaching-section teaching-resources" id="learning-resources">'
         '<div class="section-heading section-heading-small">'
         f'<h2 class="section-title">{escape(labels["heading"])}</h2>'
         f'<a class="section-more" href="{prefix}/teaching/resources/">{escape(labels["more"])} <span aria-hidden="true">↗</span></a>'
         '</div>'
-        f'<div class="learning-resource-strip" aria-label="{escape(labels["heading"], quote=True)}">{tiles}</div>'
+        '<div class="resource-carousel" data-resource-carousel>'
+        '<div class="resource-carousel-controls" hidden>'
+        f'<button type="button" data-resource-step="-1" aria-label="{previous}" title="{previous}"><span aria-hidden="true">←</span></button>'
+        f'<button type="button" data-resource-step="1" aria-label="{following}" title="{following}"><span aria-hidden="true">→</span></button></div>'
+        f'<div class="learning-resource-strip" tabindex="0" aria-label="{escape(labels["heading"], quote=True)}">{tiles}</div>'
+        '</div>'
         '</section>'
     )
 
 
 def resources_page(locale):
     labels = RESOURCE_TEXT[locale]
+    all_label = {"en": "All", "ja": "すべて", "zh": "全部"}[locale]
+    count_label = {"en": "{count} resources", "ja": "{count} 件", "zh": "{count} 项资源"}[locale]
+    empty_label = {"en": "No matching resources.", "ja": "該当するリソースはありません。", "zh": "暂无相关资源。"}[locale]
+    filters = f'<button type="button" data-resource-topic="all" aria-pressed="true">{all_label}</button>' + ''.join(
+        f'<button type="button" data-resource-topic="{topic["id"]}" aria-pressed="false">{escape(topic["labels"][locale])}</button>'
+        for topic in RESOURCE_TOPICS
+    )
+    topic_labels = {topic["id"]: topic["labels"][locale] for topic in RESOURCE_TOPICS}
     rows = ''.join(
-        f'<a class="resource-library-item" href="{escape(item["url"], quote=True)}" title="{escape(labels["open"], quote=True)}">'
+        f'<a class="resource-library-item" data-resource-topics="{escape(" ".join(item["topics"]), quote=True)}" href="{escape(item["url"], quote=True)}" title="{escape(labels["open"], quote=True)}">'
         f'<span class="resource-library-thumb"><img src="{escape(item["thumbnail"], quote=True)}" alt="" loading="lazy" width="480" height="320"></span>'
         '<span class="resource-library-copy">'
         f'<span class="learning-resource-meta">{resource_meta(item, locale)}</span>'
         f'<strong class="resource-library-title">{escape(item["title"])}</strong>'
         f'<span class="resource-library-description">{escape(item["description"][locale])}</span>'
+        f'<span class="resource-library-tags">{escape(" · ".join(topic_labels[topic] for topic in item["topics"]))}</span>'
         '</span></a>'
-        for item in LEARNING_RESOURCES
+        for item in sorted(LEARNING_RESOURCES, key=lambda item: item.get("previewOrder", 1000))
     )
     return (
         f'<!DOCTYPE html>\n<html lang="{locale}" data-theme="light">\n<head>\n'
@@ -474,7 +492,10 @@ def resources_page(locale):
         + '\n<!-- shared-header:end -->\n'
         + '<div class="container detail-container resource-library"><main>'
         + f'<section class="section"><h1 class="section-title">{escape(labels["heading"])}</h1>'
-        + f'<div class="resource-library-list">{rows}</div></section>'
+        + f'<div data-resource-library data-count-label="{count_label}">'
+        + f'<nav class="resource-filters" aria-label="{escape(labels["heading"])}" hidden>{filters}</nav>'
+        + '<p class="resource-filter-status" role="status" aria-live="polite" hidden></p>'
+        + f'<div class="resource-library-list">{rows}</div><p data-resource-empty hidden>{empty_label}</p></div></section>'
         + '</main><footer class="footer">© Jun Xie</footer></div>\n</body>\n</html>\n'
     )
 

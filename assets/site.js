@@ -12,6 +12,63 @@
   root.setAttribute("data-theme", saved === "light" || saved === "dark" ? saved : defaultTheme);
 
   window.addEventListener("DOMContentLoaded", function () {
+    document.querySelectorAll("[data-resource-carousel]").forEach((carousel) => {
+      const strip = carousel.querySelector(".learning-resource-strip");
+      const controls = carousel.querySelector(".resource-carousel-controls");
+      const buttons = Array.from(controls.querySelectorAll("[data-resource-step]"));
+      const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+      function sync() {
+        const maximum = strip.scrollWidth - strip.clientWidth;
+        controls.hidden = maximum <= 1;
+        buttons.forEach((button) => {
+          button.disabled = Number(button.dataset.resourceStep) < 0
+            ? strip.scrollLeft <= 1 : strip.scrollLeft >= maximum - 1;
+        });
+      }
+      buttons.forEach((button) => button.addEventListener("click", () => {
+        strip.scrollBy({ left: Number(button.dataset.resourceStep) * strip.clientWidth,
+          behavior: reducedMotion.matches ? "instant" : "smooth" });
+      }));
+      strip.addEventListener("scroll", sync, { passive: true });
+      window.addEventListener("resize", sync, { passive: true });
+      if ("ResizeObserver" in window) new ResizeObserver(sync).observe(strip);
+      sync();
+    });
+    document.querySelectorAll("[data-resource-library]").forEach((library) => {
+      const filters = library.querySelector(".resource-filters");
+      const buttons = Array.from(filters.querySelectorAll("[data-resource-topic]"));
+      const rows = Array.from(library.querySelectorAll("[data-resource-topics]"));
+      const status = library.querySelector(".resource-filter-status");
+      const empty = library.querySelector("[data-resource-empty]");
+      function render(requested, updateHistory) {
+        const topic = buttons.some(button => button.dataset.resourceTopic === requested) ? requested : "all";
+        let count = 0;
+        rows.forEach((row) => {
+          row.hidden = topic !== "all" && !row.dataset.resourceTopics.split(" ").includes(topic);
+          if (!row.hidden) count++;
+        });
+        buttons.forEach(button => button.setAttribute("aria-pressed", String(button.dataset.resourceTopic === topic)));
+        status.textContent = library.dataset.countLabel.replace("{count}", count);
+        empty.hidden = count !== 0;
+        const url = new URL(window.location.href);
+        if (topic === "all") url.searchParams.delete("topic");
+        else url.searchParams.set("topic", topic);
+        if (url.href !== window.location.href) {
+          window.history[updateHistory ? "pushState" : "replaceState"](null, "", url);
+        }
+        document.querySelectorAll(".lang-nav a").forEach((link) => {
+          const translated = new URL(link.href, window.location.href);
+          if (topic === "all") translated.searchParams.delete("topic");
+          else translated.searchParams.set("topic", topic);
+          link.href = translated.href;
+        });
+      }
+      filters.hidden = false;
+      status.hidden = false;
+      buttons.forEach(button => button.addEventListener("click", () => render(button.dataset.resourceTopic, true)));
+      window.addEventListener("popstate", () => render(new URL(window.location.href).searchParams.get("topic"), false));
+      render(new URL(window.location.href).searchParams.get("topic"), false);
+    });
     document.querySelectorAll("a[href]").forEach((link) => {
       const url = new URL(link.href, window.location.href);
       if ((url.protocol === "https:" || url.protocol === "http:") && url.origin !== window.location.origin) {

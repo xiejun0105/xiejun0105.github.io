@@ -41,7 +41,8 @@
 
 - `tools/build_site.py` 生成三语共享导航、页脚、论文列表、首页相关区块、项目与课程页面。
 - 课程/指导/其他成果的 `data/*.html` 是人工维护的片段，不是可以删除的构建残留。
-- 学习资源在 `data/learning-resources.json` 维护：前五项进入 Teaching 横向栏，全部条目进入三语 `/teaching/resources/` 列表；正式缩略图记录 `imageSource`，优先使用原站代表图、出版方封面或论文首页。
+- 学习资源在 `data/learning-resources.json` 维护：全部条目进入 Teaching 横向滑动栏，桌面同时显示五项，手机显示较少以保证可读性；全部条目也进入三语 `/teaching/resources/` 列表。`previewOrder` 数字越小越靠前，没有填写的条目按数据顺序排在后面；用它安排首屏五项，不要为排序复制资源。正式缩略图记录 `imageSource`，优先使用原站代表图、出版方封面或论文首页。
+- 每项资源的 `topics` 支持多个分类，分类 ID 和三语名称在 `data/learning-resource-topics.json` 维护。完整资源页按单选标签筛选，支持 `?topic=design` 深链接、历史前进后退与切换语言保留分类。无 JavaScript 时保留完整列表与原生横向滚动。
 - Blog 正文直接保存在 `blog/<slug>/index.html`；构建脚本不把 Markdown 转成文章。
 - Blog 列表在浏览器中由 `assets/blog-data.js` 生成；修改 HTML 正文不会自动改摘要或日期。
 - 会议及其他未纳入生成器的正文仍直接维护对应 HTML；不要假定所有网页都由生成器生成。

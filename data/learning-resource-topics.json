@@ -1,0 +1,9 @@
+[
+  {"id": "writing", "labels": {"en": "Writing", "ja": "ライティング", "zh": "写作"}},
+  {"id": "reading", "labels": {"en": "Reading", "ja": "読書", "zh": "阅读"}},
+  {"id": "programming", "labels": {"en": "Programming", "ja": "プログラミング", "zh": "编程"}},
+  {"id": "data-analysis", "labels": {"en": "Data analysis", "ja": "データ分析", "zh": "数据分析"}},
+  {"id": "design", "labels": {"en": "Design", "ja": "デザイン", "zh": "设计"}},
+  {"id": "causal-inference", "labels": {"en": "Causal inference", "ja": "因果推論", "zh": "因果推断"}},
+  {"id": "research-practice", "labels": {"en": "Research practice", "ja": "研究実践", "zh": "研究实践"}}
+]
