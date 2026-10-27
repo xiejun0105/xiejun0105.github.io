@@ -1,0 +1,86 @@
+[
+  {
+    "id": "tsutawaru-design",
+    "title": "伝わるデザイン｜研究発表のユニバーサルデザイン",
+    "url": "https://tsutawarudesign.com/",
+    "kind": "guide",
+    "language": "ja",
+    "thumbnail": "/images/teaching/resources/tsutawaru-design-original.png",
+    "imageSource": "https://tsutawarudesign.com/og-image.png",
+    "description": {
+      "en": "Practical guidance for clear research slides, posters, charts, and typography.",
+      "ja": "研究発表のスライド、ポスター、グラフ、文字組みを見やすく整える実践ガイド。",
+      "zh": "关于研究汇报幻灯片、海报、图表和字体排版的实用设计指南。"
+    }
+  },
+  {
+    "id": "causal-inference-remix",
+    "title": "Causal Inference: The Remix",
+    "url": "https://mixtape.scunning.com/",
+    "kind": "book",
+    "language": "en",
+    "thumbnail": "/images/teaching/resources/causal-inference-remix-cover.jpg",
+    "imageSource": "https://yalebooks.yale.edu/book/9780300272444/causal-inference/",
+    "description": {
+      "en": "Scott Cunningham's online textbook on causal inference in the social sciences.",
+      "ja": "社会科学における因果推論を学べる Scott Cunningham のオンライン教科書。",
+      "zh": "Scott Cunningham 编写的社会科学因果推断在线教材。"
+    }
+  },
+  {
+    "id": "fundamentals-data-visualization",
+    "title": "Fundamentals of Data Visualization",
+    "url": "https://clauswilke.com/dataviz/",
+    "kind": "book",
+    "language": "en",
+    "thumbnail": "/images/teaching/resources/fundamentals-data-visualization-cover.png",
+    "imageSource": "https://clauswilke.com/dataviz/cover.png",
+    "description": {
+      "en": "Claus O. Wilke's open manuscript on accurate and readable data graphics.",
+      "ja": "正確で読みやすいデータ可視化を学べる Claus O. Wilke の公開原稿。",
+      "zh": "Claus O. Wilke 关于准确、易读的数据可视化的开放书稿。"
+    }
+  },
+  {
+    "id": "r-for-data-science",
+    "title": "R for Data Science (2e)",
+    "url": "https://r4ds.hadley.nz/",
+    "kind": "book",
+    "language": "en",
+    "thumbnail": "/images/teaching/resources/r-for-data-science-cover.jpg",
+    "imageSource": "https://r4ds.hadley.nz/cover.jpg",
+    "description": {
+      "en": "A free online book on importing, transforming, visualizing, and communicating data with R.",
+      "ja": "R によるデータの読み込み、整形、可視化、伝達を学べる無料のオンライン書籍。",
+      "zh": "免费在线教材，讲解如何用 R 导入、整理、可视化和呈现数据。"
+    }
+  },
+  {
+    "id": "the-turing-way",
+    "title": "The Turing Way",
+    "url": "https://book.the-turing-way.org/",
+    "kind": "guide",
+    "language": "en",
+    "thumbnail": "/images/teaching/resources/the-turing-way-pathway.svg",
+    "imageSource": "https://book.the-turing-way.org/",
+    "description": {
+      "en": "A community handbook for reproducible, ethical, and collaborative research.",
+      "ja": "再現可能で倫理的、協働的な研究のためのコミュニティ・ハンドブック。",
+      "zh": "关于可重复、合乎伦理且协作式研究的社区手册。"
+    }
+  },
+  {
+    "id": "ten-rules-reproducible-research",
+    "title": "Ten Simple Rules for Reproducible Computational Research",
+    "url": "https://doi.org/10.1371/journal.pcbi.1003285",
+    "kind": "paper",
+    "language": "en",
+    "thumbnail": "/images/teaching/resources/ten-rules-reproducible-research-page1.png",
+    "imageSource": "https://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1003285",
+    "description": {
+      "en": "A concise open-access paper on documenting, sharing, and rerunning computational analyses.",
+      "ja": "計算研究の記録・共有・再実行に関する簡潔なオープンアクセス論文。",
+      "zh": "关于记录、共享与重现计算研究分析流程的开放获取论文。"
+    }
+  }
+]

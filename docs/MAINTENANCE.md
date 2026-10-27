@@ -31,6 +31,7 @@
 | 项目 | `data/funding.json` |
 | News | `data/news.json` |
 | 课程与指导 | `data/teaching-course-{en,ja,zh}.html`、`data/teaching-supervision-{en,ja,zh}.html` |
+| 学习资源展示栏与资源库 | `data/learning-resources.json`；缩略图在 `images/teaching/resources/` |
 | 其他成果 | `data/misc-{en,ja,zh}.html` |
 | Blog 标题、日期、排序、标签 | `assets/blog-data.js` |
 | Blog 正文、素材映射 | `blog/<slug>/index.html`、`data/blog-assets.json` |
@@ -40,6 +41,7 @@
 
 - `tools/build_site.py` 生成三语共享导航、页脚、论文列表、首页相关区块、项目与课程页面。
 - 课程/指导/其他成果的 `data/*.html` 是人工维护的片段，不是可以删除的构建残留。
+- 学习资源在 `data/learning-resources.json` 维护：前五项进入 Teaching 横向栏，全部条目进入三语 `/teaching/resources/` 列表；正式缩略图记录 `imageSource`，优先使用原站代表图、出版方封面或论文首页。
 - Blog 正文直接保存在 `blog/<slug>/index.html`；构建脚本不把 Markdown 转成文章。
 - Blog 列表在浏览器中由 `assets/blog-data.js` 生成；修改 HTML 正文不会自动改摘要或日期。
 - 会议及其他未纳入生成器的正文仍直接维护对应 HTML；不要假定所有网页都由生成器生成。

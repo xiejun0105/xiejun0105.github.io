@@ -20,6 +20,7 @@ THUMBNAILS = json.loads((ROOT / "data/paper-thumbnails.json").read_text())
 PAPERS = JOURNAL[:5]
 FUNDING = json.loads((ROOT / "data/funding.json").read_text())
 NEWS = json.loads((ROOT / "data/news.json").read_text())
+LEARNING_RESOURCES = json.loads((ROOT / "data/learning-resources.json").read_text())
 NEWS_HEADING = {"en": "Media & News", "ja": "メディア・ニュース", "zh": "媒体报道"}
 LANGUAGES = {
     "en": {"prefix": "", "home": "Home", "papers": "Publications", "projects": "Projects", "teaching": "Teaching", "conference": "Conference", "blog": "Blog", "featured": "Recent publications", "intro": "The latest peer-reviewed work on sustainability, disclosure, and financial materiality.", "all": "All journal articles", "policy": "Policy", "reports": "Policy & international reports", "funding": "Funding & Project", "misc": "Other research outputs", "more": "See more"},
@@ -74,7 +75,7 @@ def shared_header(locale, current, suffix=()):
     for code, label in (("en", "EN"), ("ja", "日本語"), ("zh", "中文")):
         target_prefix = LANGUAGES[code]["prefix"]
         target_path = ROOT / target_prefix.lstrip("/") / Path(*suffix) if suffix else ROOT / target_prefix.lstrip("/")
-        target_suffix = suffix if (target_path / "index.html").exists() or (suffix and suffix[0] in ("policy", "funding", "news")) else ("blog",) if suffix and suffix[0] == "blog" else ()
+        target_suffix = suffix if (target_path / "index.html").exists() or (suffix and suffix[0] in ("policy", "funding", "news")) or suffix == ("teaching", "resources") else ("blog",) if suffix and suffix[0] == "blog" else ()
         url = target_prefix + "/" + "/".join(target_suffix).removesuffix("index.html").strip("/")
         if not url.endswith("/"):
             url += "/"
@@ -413,6 +414,70 @@ TEACHING_TEXT = {
     "zh": ("教学与指导", "授课", "承担的课程。", "论文指导", "按年份整理的硕士与本科论文指导主题。"),
 }
 
+RESOURCE_TEXT = {
+    "en": {"heading": "Learning resources", "more": "View all resources", "open": "Open resource", "book": "Online book", "guide": "Guide", "paper": "Paper", "en": "English", "ja": "Japanese"},
+    "ja": {"heading": "学習リソース", "more": "すべて見る", "open": "リソースを開く", "book": "オンライン書籍", "guide": "ガイド", "paper": "論文", "en": "英語", "ja": "日本語"},
+    "zh": {"heading": "学习资源", "more": "查看全部", "open": "打开资源", "book": "在线书籍", "guide": "指南", "paper": "论文", "en": "英语", "ja": "日语"},
+}
+
+
+def resource_meta(item, locale):
+    labels = RESOURCE_TEXT[locale]
+    return f'{escape(labels[item["kind"]])} · {escape(labels[item["language"]])}'
+
+
+def resource_tile(item, locale):
+    open_label = escape(RESOURCE_TEXT[locale]["open"], quote=True)
+    return (
+        f'<a class="learning-resource" href="{escape(item["url"], quote=True)}" title="{open_label}">'
+        f'<span class="learning-resource-thumb"><img src="{escape(item["thumbnail"], quote=True)}" alt="" loading="lazy" width="480" height="320"><span class="learning-resource-hover" aria-hidden="true">{open_label} ↗</span></span>'
+        f'<span class="learning-resource-meta">{resource_meta(item, locale)}</span>'
+        f'<strong class="learning-resource-title">{escape(item["title"])}</strong>'
+        '</a>'
+    )
+
+
+def resource_preview(locale):
+    labels = RESOURCE_TEXT[locale]
+    prefix = LANGUAGES[locale]["prefix"]
+    tiles = ''.join(resource_tile(item, locale) for item in LEARNING_RESOURCES[:5])
+    return (
+        '<section class="section teaching-section teaching-resources" id="learning-resources">'
+        '<div class="section-heading section-heading-small">'
+        f'<h2 class="section-title">{escape(labels["heading"])}</h2>'
+        f'<a class="section-more" href="{prefix}/teaching/resources/">{escape(labels["more"])} <span aria-hidden="true">↗</span></a>'
+        '</div>'
+        f'<div class="learning-resource-strip" aria-label="{escape(labels["heading"], quote=True)}">{tiles}</div>'
+        '</section>'
+    )
+
+
+def resources_page(locale):
+    labels = RESOURCE_TEXT[locale]
+    rows = ''.join(
+        f'<a class="resource-library-item" href="{escape(item["url"], quote=True)}" title="{escape(labels["open"], quote=True)}">'
+        f'<span class="resource-library-thumb"><img src="{escape(item["thumbnail"], quote=True)}" alt="" loading="lazy" width="480" height="320"></span>'
+        '<span class="resource-library-copy">'
+        f'<span class="learning-resource-meta">{resource_meta(item, locale)}</span>'
+        f'<strong class="resource-library-title">{escape(item["title"])}</strong>'
+        f'<span class="resource-library-description">{escape(item["description"][locale])}</span>'
+        '</span></a>'
+        for item in LEARNING_RESOURCES
+    )
+    return (
+        f'<!DOCTYPE html>\n<html lang="{locale}" data-theme="light">\n<head>\n'
+        f'  <meta charset="UTF-8">\n  <title>{escape(labels["heading"])} | Jun Xie</title>\n'
+        '  <meta name="viewport" content="width=device-width, initial-scale=1.0">\n'
+        '  <link rel="stylesheet" href="/assets/style.css">\n  <script src="/assets/site.js"></script>\n'
+        '</head>\n<body>\n<!-- shared-header:start -->\n'
+        + shared_header(locale, "teaching", ("teaching", "resources"))
+        + '\n<!-- shared-header:end -->\n'
+        + '<div class="container detail-container resource-library"><main>'
+        + f'<section class="section"><h1 class="section-title">{escape(labels["heading"])}</h1>'
+        + f'<div class="resource-library-list">{rows}</div></section>'
+        + '</main><footer class="footer">© Jun Xie</footer></div>\n</body>\n</html>\n'
+    )
+
 def teaching_page(locale):
     prefix = LANGUAGES[locale]["prefix"]
     title, courses, course_intro, supervision, supervision_intro = TEACHING_TEXT[locale]
@@ -428,6 +493,7 @@ def teaching_page(locale):
         + '\n<!-- shared-header:end -->\n'
         + '<div class="container detail-container teaching-page"><main>'
         + f'<section class="section teaching-section" id="courses"><h2 class="section-title">{escape(courses)}</h2><p class="section-intro">{escape(course_intro)}</p>{course_html}</section>'
+        + resource_preview(locale)
         + f'<section class="section teaching-section" id="supervision"><h2 class="section-title">{escape(supervision)}</h2><p class="section-intro">{escape(supervision_intro)}</p>{supervision_html}</section>'
         + '</main><footer class="footer">© Jun Xie</footer></div>\n</body>\n</html>\n'
     )
@@ -440,6 +506,9 @@ for locale in ("en", "ja", "zh"):
     news_path.write_text(news_page(locale))
     teaching_path = ROOT / prefix.lstrip("/") / "teaching/index.html"
     teaching_path.write_text(teaching_page(locale))
+    resources_path = ROOT / prefix.lstrip("/") / "teaching/resources/index.html"
+    resources_path.parent.mkdir(parents=True, exist_ok=True)
+    resources_path.write_text(resources_page(locale))
     for kind, anchor in (("course", "courses"), ("supervision", "supervision")):
         redirect_path = ROOT / prefix.lstrip("/") / "teaching" / kind / "index.html"
         target = f'{prefix}/teaching/#{anchor}'
